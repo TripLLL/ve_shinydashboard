@@ -1,4 +1,8 @@
-data <- read.csv("Pretest_Syntax_and_data_files/survey_584752_R_data_file.csv", quote = "'\"", na.strings=c("", "\"\""), stringsAsFactors=FALSE, fileEncoding="UTF-8-BOM")
+data <- read.csv(paste(datapath, "survey_584752_R_data_file.csv", sep = "/"),
+                 quote = "'\"", 
+                 na.strings = c("", "\"\""), 
+                 stringsAsFactors = FALSE, 
+                 fileEncoding = "UTF-8-BOM")
 
 
 # LimeSurvey Field type: F
@@ -2270,3 +2274,6 @@ attributes(data)$variable.labels[466] <- "{if(diskallg_SQ005_A1.NAOK == \"1\" OR
 names(data)[466] <- "endurl"
 # Variable name was incorrect and was changed from  to q_ .
 
+saveRDS(data, file = paste(outpath, "example_data.rds", sep = "/"))
+        
+        
