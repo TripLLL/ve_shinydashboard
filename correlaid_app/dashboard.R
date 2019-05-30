@@ -5,20 +5,21 @@ pacman::p_load(shinydashboard, shiny)
 source(file = ".path.R")
 
 # run script that turns limesurvey output into R Dataset
-source(file = "correlaid_app/SyntaxAndDataFiles/survey_584752_R_syntax_file.R")
+source(file = paste(datapath, "survey_584752_R_syntax_file.R", sep = "/"))
 
-
+source(file = "tools.R")
      
 ## Header ---------------------------------------------------------------------
-header      <-  dashboardHeader(title = "Basic tabs")
+header      <-  dashboardHeader(title = "Dashboard", titleWidth = 150)
 
 
 ## Sidebar --------------------------------------------------------------------  
 sidebar     <- dashboardSidebar(
+          width = 150,
           sidebarMenu(
-             menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-             menuItem("Widgets", tabName = "widgets", icon = icon("th")),
-             menuItem("LisaTest", tabName = "LisaTest", icon = NULL)
+             menuItem("Univariate", tabName = "unitab", icon = icon("chart-bar")),
+             menuItem("Bivariate", tabName = "bitab", icon = icon("table")),
+             menuItem("Free Text", tabName = "txtab", icon = icon("pen-nib"))
              )
           )
 
@@ -27,18 +28,26 @@ sidebar     <- dashboardSidebar(
 body        <- dashboardBody(
     tabItems(
       # First tab content
-      tabItem(tabName = "dashboard",
+      tabItem(tabName = "unitab",
+            h1("Univariate Analysis"),
             fluidRow(
-                box(plotOutput("plot1", height = 250)),
-                
                 box(
                   title = "Controls",
-                  sliderInput("slider", "Number of observations:", 1, 100, 50)
-                )
-              )
-            ),
+                  selectInput(inputId = 'select_variable', 
+                              label = 'Select Variable', 
+                              choices = colnames(data), 
+                              selected = NULL)
+                ),
+              h2('Data'),
+                      box(width = 12,
+                          dataTableOutput(outputId = 'data')
+                      ),
+                      downloadButton(outputId = 'download_data', label = 'Download')
+          )
+      ),
       # Second tab content
-      tabItem(tabName = "LisaTest",
+      tabItem(tabName = "bitab",
+              h2("Bivariate Analysis"),
               fluidRow(
                     box(plotOutput("plot2", height = 250)),
                     
@@ -50,8 +59,8 @@ body        <- dashboardBody(
       ),
       
       # Second tab content
-      tabItem(tabName = "widgets",
-              h2("Widgets tab content")
+      tabItem(tabName = "txtab",
+              h2("Free-text analysis")
       )
     )
   )
@@ -62,17 +71,26 @@ body        <- dashboardBody(
 ui <- dashboardPage(header, sidebar, body, skin = "black")
 
 server <- function(input, output) {
-      
-  set.seed(122)
-  histdata <- rnorm(500)
-
-  output$plot1 <- renderPlot({
-        data <- histdata[seq_len(input$slider)]
-        hist(data)})
-  
-  output$plot2 <- renderPlot({
-        plot(cars, type = input$plotType)
+  filter.data <- reactive({
+    data %>% 
+      select(id, starts_with(input$selected_variable), -ends_with("other"))
   })
+  
+  output$data <- renderDataTable(
+    filter.data(), 
+    options = list(pageLength = 10)
+  )
+  
+  output$download_data <- downloadHandler(
+    
+    filename = function() {
+      paste0('data_export_',format(Sys.time(), "%Y%m%d_%H%M%S"),'.csv')
+    },
+    
+    content = function(file) {
+      write_csv(x = filter.data(), path = file, na = '')
+    }
+  )
   
 }
 
