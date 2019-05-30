@@ -1,0 +1,89 @@
+---
+title: "Exporting Data Structure"
+author: "Eva Martinez"
+output: 
+      html_notebook:
+            toc: yes
+---
+
+# Introduction
+
+I found that working with labelled data can be a bit tricky, as the subsetting of certain columns does not respect the subsetting of labels as well.  
+Moreover, maintaining a `.R` file with over 2200 rows of explicit definitions does not seem scalable to new surveys.  
+For this reason, I have created a `.xlsx` export that would be more maintainable and customizable by the organization. This file would provide us a broader overview of the structure of the dataset and a mapping dictionary from the coded columns and levels to what 
+
+# Data Process
+
+Load the libraries we will need.
+```{r}
+library(tidyverse) # data manipulation
+library(openxlsx) # .xlsx manipulation
+```
+
+Read the data.
+```{r}
+# read path to data that can be changed for individual computers in the ".path.R" file.
+# This file will stay on the local machine and is not shared or updated in the git cloud.
+source(file = ".path.R")
+
+# run script that turns limesurvey output into R Dataset
+source(file = paste(datapath, "survey_584752_R_syntax_file.R", sep = "/"))
+```
+
+We summarize the column names and the variable labels. The columns number will allow to sort the columns data in the file.
+```{r}
+mapping.colnames.df <- data.frame(colnum = 1:ncol(data), colnames = names(data), collabels = attributes(data)$variable.labels)
+```
+
+We add the data types of each column.
+```{r}
+data_types.df <- data %>% mutate_all(.funs = ~typeof(.x) %>% unique()) %>% t() %>% as.data.frame() %>% select(1)
+data_types.df$colnames <- rownames(data_types.df)
+colnames(data_types.df) <- c("datatype", "colnames")
+rownames(data_types.df) <- NULL
+```
+
+So far we know whether a dimension is either `character`, `double` or `integer`. We will create filters for factors.
+```{r}
+factor_names <- data %>% summarise_each(list(is.factor)) %>% unlist %>% .[.] %>% names
+mapping.colnames.df <- merge(mapping.colnames.df, data_types.df, by = "colnames") %>% mutate(is_factor = as.numeric(colnames %in% factor_names), factor_type = "") 
+```
+
+You may notice that I have added a blank column `factor_type`. The intention is to fill this info manually after the export. The reason is that we will treat factor levels and labels in a different sheet and this column will be the foreign key to that sheet.
+```{r}
+fact_name <- factor_names[[1]]
+summ_levels.df <- data.frame(factor_labels = levels(data[[fact_name]]))
+for(i in 2:length(factor_names)){
+      fact_name <- factor_names[[i]]
+      summ_levels.df <- rbind(summ_levels.df, data.frame(factor_labels = levels(data[[fact_name]])))
+}
+```
+
+However, factors kind of "forget" the original levels, so that we are forced to create blank colums that will need to be filled in manualy (very happy if you have any suggestion, please reach out).
+```{r}
+summ_levels.df <- unique(summ_levels.df) %>% mutate(factor_type= "", factor_levels = "") %>% select(factor_type, factor_levels, factor_labels)
+```
+
+# Data export
+
+Finally we use the `openxlsx`library to export the `.xlsx` file.
+```{r}
+wb <- createWorkbook()
+
+addWorksheet(wb = wb, sheetName =  "col_names_labels")
+      
+writeData(wb = wb, 
+          sheet = "col_names_labels",
+          x = mapping.colnames.df) # the dataframe to save.
+
+addWorksheet(wb = wb, sheetName =  "factor_detail")
+
+writeData(wb = wb, 
+          sheet = "factor_detail",
+          x = summ_levels.df ) # the dataframe to save.
+
+saveWorkbook(wb = wb, 
+             file = paste0('exports/mapping_colnames_',format(Sys.time(), "%Y%m%d_%H%M%S"),'.xlsx'), # to ensure not overwritting previous work
+             overwrite = TRUE)
+```
+
