@@ -1,0 +1,482 @@
+---
+title: "Untitled"
+author: "Lisa Reiber"
+date: "7 6 2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+    df_print: kable
+    theme: spacelab
+    highlight: pygments
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = T)
+```
+
+# Aufbereitung des Diversity Profils
+
+Zuerst werden die nötigen Pakete geladen und Daten eingelesen:
+```{r}
+pacman::p_load(tidyverse, forcats, janitor, haven, skimr)
+raw1 <- readRDS(file = "data/example_data.rds")
+```
+
+Nun gibt es verschiedene Dimensionen, die von dem Diversity Profil erfasst werden sollen.
+
+      - Gender, 
+      - sexuelle Orientierung, 
+      - Ost,
+      - Alter
+      - Migrationshintergrund, 
+      - rass. Diskriminierte Menschen, 
+      - Beeinträchtigung, 
+      - SES,
+
+Diese Variablen werden jetzt in den einzelnen Abschnitten erarbeitet bzw. bearbeitet, bis sie die gewünschte Form erreichen.
+
+## Gender {.tabset}
+
+zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Gender Dimension des Diversity Profils zu tun haben
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+---
+
+Da haben wir zum Einen die Variablen, die das wort `gender' im Variablennamen haben
+```{r}
+# raw1 %>% select(contains("gender"), -contains("other")) %>% View()
+
+gender_frq <- raw1 %>% 
+      select(id, contains("gender"), -contains("other")) %>%
+      gather(key = var, value = answer , -id) %>% 
+      arrange(id)
+ 
+gender_frq %>% tabyl(answer, var) 
+
+gender_frq %>% tabyl(var, answer) %>% 
+      adorn_percentages() %>% 
+      adorn_rounding(digits = 12) 
+```
+
+### Plot Raw Data
+
+** Visualize Raw Data **
+
+---
+
+wir können das auch visualisieren
+```{r, fig.width = 3, fig.height=3}
+my_plot = function(variable) {
+     ggplot(raw1, aes_string(x = variable) ) +
+          geom_bar() +
+          theme_bw(base_size = 14) 
+}
+
+gender_vars <- names(raw1 %>% select(contains("gender"), -contains("other")))
+
+all_plots = pmap(list(gender_vars), my_plot)
+all_plots
+```
+
+Wir können uns alle Grafiken zusammengefügt angucken
+```{r}
+cowplot::plot_grid(plotlist = all_plots,
+          labels = "AUTO",
+          align = "hv")
+```
+
+### Binär: Gender {.active}
+
+**Generate New Variable**
+
+---
+
+Wir wollen eine gender Variable `binary' erstellen, die in Binär vs. Non-Binär unterscheidet
+```{r}
+raw2 <- raw1 %>% 
+      mutate(binary = case_when(# binär = weiblich, männlich
+                                    gender_SQ001 == "Ja" | gender_SQ002 == "Ja" ~ "binär",
+                                  # non binär: divers, trans*, inter*
+                                  # gender_SQ006 erstmal außen vor
+                                    gender_SQ003 == "Ja" |
+                                    gender_SQ004 == "Ja" |
+                                    gender_SQ005 == "Ja"   ~ "nicht-binär",
+                                  TRUE ~ NA_character_ ),
+             binary = factor(binary, c("binär", "nicht-binär")),
+             female = case_when(gender_SQ002 == "Ja" ~ "female",
+                                gender_SQ003 == "Ja" ~ "male"),
+             female = factor(female, c("female", "male"))
+      )
+
+raw2 %>% janitor::tabyl(binary, female)
+raw2 %>% skim(binary, female)
+```
+
+## sexuelle Orientierung {.tabset}
+zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension: sexuelle Diskriminierung des Diversity Profils zu tun haben
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+---
+
+Da haben wir zum Einen die Variablen, die das wort `sexo' im Variablennamen haben
+```{r}
+# raw1 %>% select(contains("gender"), -contains("other")) %>% View()
+
+sexo_frq <- raw1 %>% 
+      select(id, contains("sexo"), -contains("other")) %>%
+      gather(key = var, value = answer , -id) %>% 
+      arrange(id)
+ 
+sexo_frq %>% tabyl(answer, var) 
+
+sexo_frq %>% tabyl(var, answer) %>% 
+      adorn_percentages() %>% 
+      adorn_rounding(digits = 12) 
+
+```
+
+### Plot Raw Data
+
+** Visualize Raw Data **
+
+---
+
+wir können das auch visualisieren
+```{r, fig.width = 3, fig.height=3}
+my_plot = function(variable) {
+     ggplot(raw2, aes_string(x = variable) ) +
+          geom_bar() +
+          theme_bw(base_size = 14) 
+}
+
+sexo_vars <- names(raw1 %>% select(contains("sexo"), -contains("other")))
+
+all_plots = pmap(list(gender_vars), my_plot)
+all_plots
+```
+
+Wir können uns alle Grafiken zusammengefügt angucken
+```{r}
+cowplot::plot_grid(plotlist = all_plots,
+          labels = "AUTO",
+          align = "hv")
+```
+
+```{r}
+sexo_frq %>% 
+      ggplot(aes(x = answer, fill = var)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ var, scales = "free_x") +
+      theme(legend.position = "none")
+
+sexo_frq %>% 
+      ggplot(aes(x = var, fill = answer)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ answer) +
+      coord_flip() +
+      theme(legend.position = "none")
+```
+
+### Binär: Sexuelle Orientierung {.active}
+
+**Generate New Variable**
+
+---
+
+Wir wollen eine gender Variable `binary' erstellen, die in Binär vs. Non-Binär unterscheidet
+```{r}
+raw3 <- raw2 %>% 
+      mutate(lgbtiq = case_when(# binär = weiblich, männlich
+                                    sexo_SQ003 == "Ja" | 
+                                    sexo_SQ004 == "Ja" |
+                                    sexo_SQ006 == "Ja" |
+                                    sexo_SQ007 == "Ja" |
+                                    sexo_SQ008 == "Ja" ~ "lgbtiq",
+                                  # non binär: divers, trans*, inter*
+                                  # gender_SQ006 erstmal außen vor
+                                    # sexo_SQ002 == "Ja" | ???
+                                    sexo_SQ005 == "Ja"   ~ "nicht-lgbtiq",
+                                  TRUE ~ NA_character_ ),
+             binary = factor(binary, c("lgbtiq", "nicht-lgbtiq"))
+      )
+
+raw3 %>% janitor::tabyl(lgbtiq)
+```
+
+
+## Ost {.tabset}
+zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension Ost des Diversity Profils zu tun haben
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+---
+
+Da haben wir zum Einen die Variablen, die das wort `gebort' im Variablennamen haben.
+```{r}
+# raw3 %>% select(gebort) %>% View()
+# häufigkeiten anzeigen
+raw3 %>% count(gebort)
+
+#value labels des faktors anzeigen
+levels(raw3$gebort)
+
+```
+
+### Plot Raw Data
+
+** Visualize Raw Data **
+
+---
+
+wir können das auch visualisieren
+```{r}
+raw3 %>%
+      select(id, gebort) %>% 
+      gather(var, answer, -id) %>% 
+      ggplot(aes(x = var, fill = answer)) +
+      geom_bar(position = "dodge") +
+      theme(legend.position = "top") +
+      scale_fill_discrete(guide = guide_legend(nrow = 3, title.position = "top"))
+```
+
+### Binär: Ost {.active}
+
+**Generate New Variable**
+
+---
+
+Wir wollen eine gender Variable `binary' erstellen, die in Binär vs. Non-Binär unterscheidet
+
+Wir sehen, dass die Variable sehr lange Value Labels hat. Daher benennen wir sie um.
+```{r}
+raw4 <- raw3 %>% 
+      mutate(ost = case_when(grepl('DDR', gebort)  ~ "Ost",
+                             grepl('Bayern', gebort) ~ "West",
+                             TRUE ~ NA_character_),
+             # aus dem Character Vector einen Faktor machen:
+             ost = factor(ost, c("Ost", "West"))
+             )
+ 
+raw4 %>% tabyl(ost)
+
+```
+
+
+## Age {.tabset}
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+---
+
+Das Alter kann durch das Erhebungsjahr und das Geburtsjahr erstellt werden.
+```{r}
+raw4$gebjahr %>% str()
+```
+
+Wir sehen, dass es ein Faktor ist, obwohl es eigentlich besser durch eine numerische variable dargestellt wird. das ändern wir
+
+
+### Plot Raw Data
+
+** Visualize Raw Data **
+
+---
+
+Altersstruktur als Plot
+```{r}
+raw4 %>% 
+      mutate(age = 2019 - as.numeric(as.character(gebjahr))) %>% 
+      ggplot(aes(1, fill = factor(age))) +
+      geom_bar(position = "dodge") 
+
+raw4 %>% 
+      mutate(age = 2019 - as.numeric(as.character(gebjahr))) %>%
+      count(age) %>% 
+      drop_na(age) %>% 
+      ggplot(aes(age, n)) +
+      geom_point() +
+      geom_violin()
+
+```
+
+### Age {.active}
+
+**Generate New Variable**
+
+---
+
+```{r}
+raw5 <- raw4 %>% 
+      mutate(age = 2019 - as.numeric(as.character(gebjahr)))
+
+raw5 %>% count(age)
+```
+
+## Migrationshintergrund {.tabset}
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+---
+
+Zuerst sehen wir uns die Roh-Daten an, die etwas mit der Dimension Migrationshintergrund zu tun haben:
+
+Wir sehen, dass die Variable wieder sehr lange Value Labels hat.
+```{r}
+raw5 %>% count(mh)
+
+raw5$mh %>% levels()
+```
+
+### Plot Raw Data
+
+** Visualize Raw Data **
+
+---
+
+```{r}
+raw5 %>%
+      select(id, mh) %>% 
+      gather(var, answer, -id) %>% 
+      ggplot(aes(x = var, fill = answer)) +
+      geom_bar(position = "dodge") +
+      theme(legend.position = "top") +
+      scale_fill_discrete(guide = guide_legend(nrow = 8, title.position = "top"))
+```
+
+### Binär: Migrationshintergrund {.active}
+
+**Generate New Variable**
+
+---
+
+```{r}
+raw6 <- raw5 %>% 
+      mutate(mh_d = case_when(grepl(levels(raw5$mh)[1], mh)  |
+                              grepl(levels(raw5$mh)[2], mh)  |
+                              grepl(levels(raw5$mh)[3], mh)  |
+                              grepl(levels(raw5$mh)[4], mh)  |
+                              grepl(levels(raw5$mh)[5], mh)  |
+                              grepl(levels(raw5$mh)[6], mh)  ~ "Migrationshintergrund",
+                              grepl(levels(raw5$mh)[7], mh)  ~ "kein Migrationshintergrund",
+                             TRUE ~ NA_character_),
+             # aus dem Character Vector einen Faktor machen:
+             mh_d = factor(mh_d, c("Migrationshintergrund", "kein Migrationshintergrund"))
+             )
+ 
+raw6 %>% tabyl(mh_d)
+```
+
+
+# Save data
+
+```{r}
+
+data_processed <- raw6
+saveRDS(data_processed, file = paste(outpath, "data_processed.rds", sep = "/"))
+
+```
+
+# Cut Outs
+
+Gender: if you want a tibble as output
+```{r}
+raw1 %>% 
+      # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
+      select(contains("gender"), -contains("other")) %>% 
+      # fehlende werte explizit machen
+      mutate_all(~forcats::fct_explicit_na(.)) %>% 
+      # für alle Variablen Häufigkeitsangaben ausgeben
+      map(~count(data.frame(x =.x), x)) 
+
+raw1 %>% count(gender_SQ001)
+```
+
+other wy of calculating frequency tables
+```{r}
+gender_frq <- raw1 %>% 
+      # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
+      select(contains("gender"), -contains("other")) %>% 
+      # fehlende werte explizit machen
+      mutate_all(~forcats::fct_explicit_na(.)) %>% 
+      # für alle Variablen Häufigkeitsangaben ausgeben
+      map_df(~ tabyl(data.frame(x = .), x), .id = "var") 
+
+gender_frq %>% 
+      select(-percent) %>% 
+      spread(x, n)
+
+gender_frq %>% 
+      select(-n) %>% 
+      spread(x, percent) 
+```
+
+and an even shorter way
+```{r}
+raw1 %>% 
+      # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
+      select(id, contains("gender"), -contains("other")) %>%
+      # fehlende werte explizit machen
+      mutate_if(is.factor, ~forcats::fct_explicit_na(.)) %>% 
+      gather(key = var, value = answer , -id) %>% 
+      tabyl(var, answer) %>% 
+      adorn_percentages() %>% 
+      adorn_rounding(digits = 2) %>% 
+      adorn_ns()
+```
+
+```{r}
+gender_frq <- raw1 %>% 
+      # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
+      select(contains("gender"), -contains("other")) %>% 
+      # fehlende werte explizit machen
+      mutate_all(~forcats::fct_explicit_na(.)) %>% 
+      # für alle Variablen Häufigkeitsangaben ausgeben
+      map_df(~ count(data.frame(x = .), x), .id = "var") 
+
+gender_frq %>% 
+      spread(x, n)
+
+gender_frq %>% 
+      group_by(var) %>% 
+      mutate(percent = scales::percent(n/sum(n))) %>%
+      select(-n) %>% 
+      spread(x, percent)
+```
+
+another way to recode factors
+```{r eval=FALSE, include=FALSE}
+case_when(  mh == paste(levels(raw5$mh)[1]) |
+            mh == paste(levels(raw5$mh)[2]) | 
+            mh == paste(levels(raw5$mh)[3]) | 
+            mh == paste(levels(raw5$mh)[4]) | 
+            mh == paste(levels(raw5$mh)[5]) | 
+            mh == paste(levels(raw5$mh)[6]) | 
+            mh == paste(levels(raw5$mh)[7]) ~ "recode this")
+```
+
+
+# help
+
+- purrr: https://stackoverflow.com/questions/49989741/error-using-dplyrcount-within-purrrmap
+- purrr: https://stackoverflow.com/questions/43013175/function-to-generate-multiple-htmltables-using-purrrmap
+- purrr und plots: https://aosmith.rbind.io/2018/01/31/added-variable-plots/
+
+
+
+
