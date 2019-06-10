@@ -27,11 +27,11 @@ attributes(data)$variable.labels[5] <- "Zufallsgeneratorstartwert"
 names(data)[5] <- "q_"
 # LimeSurvey Field type: A
 data[, 6] <- as.character(data[, 6])
-attributes(data)$variable.labels[6] <- "Vielen Dank für Ihre Bereitschaft an der Befragung „Vielfalt entscheidet Thüringen“ (VET) teilzunehmen. Ziel dieser Befragung ist es, die Grundlage für eine fundierte und nachhaltige Diversity-Strategie zu legen, um gemeinsam mit Ihnen die Thüringer Verwaltung auf die Zukunft vorzubereiten. Mit Ihrer Teilnahme stellen Sie sicher, dass eine Vielzahl von Perspektiven und Erfahrungen in die Evaluierung und Bedarfsermittlung von Maßnahmen in Bezug auf Chancengerechtigkeit, Vielfalt, Integration, Inklusion und Diskriminierung in die Befragung einfließen kann. Neben einer differenzierten und ausgewogenen Personalstruktur soll die Befragung die Thüringer Landesverwaltung dabei unterstützen, die Vielfältigkeit und Individualität der Mitarbeitenden wahrzunehmen und systematisch zu fördern.     Die Befragung wird von Citizens For Europe gUG durchgeführt und durch die Thüringer Staatskanzlei gefördert. Die Landesstelle für Antidiskriminierung Thüringen (LADS) und die Thüringer Beauftragte für Integration, Migration und Flüchtlinge unterstützen die Befragung.     Die Ergebnisdarstellung erfolgt anonymisiert, so dass keine Zuordnung der Antworten zu einzelnen Personen möglich ist. Alle Daten werden streng vertraulich behandelt, und nicht an Dritte weitergegeben und nicht auf Landesservern gespeichert. Die Einwilligung des Thüringer Landesbeauftragten für Datenschutz liegt vor.     Die Beantwortung des Online-Fragebogens ist freiwillig und dauert ca. 25 Minuten.     Zur Navigation innerhalb der Befragung nutzen Sie bitte ausschließlich die Weiter- und Zurück-Buttons jeweils unten auf der Seite. Sofern die Voreinstellungen auf Ihrem Computer es zulassen, werden Cookies gesetzt. Auf diese Weise wird eine Wiederaufnahme der Befragung nach einer Unterbrechung ermöglicht. Cookies werden 48 Stunden nach dem Ende des Befragungszeitraums automatisch gelöscht. Wenn Sie Cookies zwischenzeitlich selbst entfernen oder die Setzung von Cookies nicht zulassen ist eine Wiederaufnahme der bereits begonnenen Befragung nicht möglich und Sie werden gebeten den Fragebogen von Beginn an ausfüllen.     Wenn Sie weitere Fragen oder Anmerkungen haben, können Sie uns per E-Mail kontaktieren: befragung@vielfaltentscheidet.de   "
+attributes(data)$variable.labels[6] <- "Vielen Dank für Ihre Bereitschaft an der Befragung „Vielfalt entscheidet Thüringen“ (VET) teilzunehmen. Ziel dieser Befragung ist es, die Grundlage für eine fundierte und nachhaltige Diversity-Strategie zu legen, um gemeinsam mit Ihnen die Thüringer Verwaltung auf die Zukunft vorzubereiten. Mit Ihrer Teilnahme stellen Sie sicher, dass eine Vielzahl von Perspektiven und Erfahrungen in die Evaluierung und Bedarfsermittlung von Maßnahmen in Bezug auf Chancengerechtigkeit, Vielfalt, Integration, Inklusion und Diskriminierung in die Befragung einfließen kann. Neben einer differenzierten und ausgewogenen Personalstruktur soll die Befragung die Thüringer Landesverwaltung dabei unterstützen, die Vielfältigkeit und Individualität der Mitarbeitenden wahrzunehmen und systematisch zu fördern.     Die Befragung wird von Citizens For Europe gUG durchgeführt und durch die Thüringer Staatskanzlei gefördert. Die Landesstelle für Antidiskriminierung Thüringen (LADS) und die Thüringer Beauftragte für Integration, Migration und Flüchtlinge unterstützen die Befragung.     Die Ergebnisdarstellung erfolgt anonymisiert, so dass keine Zuordnung der Antworten zu einzelnen Personen möglich ist. Alle Daten werden streng vertraulich behandelt, und nicht an Dritte weitergegeben und nicht auf Landesservern gespeichert. Die Einwilligung des Thüringer Landesbeauftragten für Datenschutz liegt vor.     Die Beantwortung des Online-Fragebogens ist freiwillig und dauert ca. 25 Minuten.     Zur Navigation innerhalb der Befragung nutzen Sie bitte ausschließlich die Weiter- und Zurück-Buttons jeweils unten auf der Seite. Sofern die Voreinstellungen auf Ihrem Computer es zulassen, werden Cookies gesetzt. Auf diese Weise wird eine Wiederaufnahme der Befragung nach einer Unterbrechung ermöglicht. Cookies werden 48 Stunden nach dem Ende des Befragungszeitraums automatisch gelöscht. Wenn Sie Cookies zwischenzeitlich selbst entfernen oder die Setzung von Cookies nicht zulassen ist eine Wiederaufnahme der bereits begonnenen Befragung nicht möglich und Sie werden gebeten den Fragebogen von Beginn an ausfüllen.     Wenn Sie weitere Fragen oder Anmerkungen haben, können Sie uns per E-Mail kontaktieren: befragung@vielfaltentscheidet.de   "
 names(data)[6] <- "willkommen"
 # LimeSurvey Field type: A
 data[, 7] <- as.character(data[, 7])
-attributes(data)$variable.labels[7] <- " Im Rahmen unserer wissenschaftlichen Befragung „Vielfalt entscheidet Thüringen“ verarbeiten wir, die Citizens For Europe („CFE“) gUG, auch Ihre personenbezogenen Daten. Wir halten uns dabei an die Datenschutz-Grundverordnung (DSGVO) und das Bundesdatenschutzgesetz (BDSG).     Personenbezogene Daten  Nach der Datenschutz-Grundverordnung (Art. 4 Nr. 1) verarbeiten wir im Rahmen dieser Befragung folgende personenbezogene Daten:  • Einrichtungszugehörigkeit innerhalb der Thüringer Landesverwaltung  • Position innerhalb der Einrichtung und ggf. Anzahl der Mitarbeitenden  • Anstellungs- und Dienstverhältnis  • Evaluation von Maßnahmen und Erhebung von Handlungsbedarfen zur Förderung von Vielfalt und Chancengerechtigkeit  • Einschätzung zum Arbeitsklima  • soziale Herkunft/sozioökonomische Lage  • ostdeutsche/westdeutsche Sozialisation  • Alter  • Geschlecht  • Migrationshintergrund  • rassistische Diskriminierung  • sexuelle Orientierung/Identität  • Glaubensgemeinschaft und Weltanschauung  • Behinderungen/Formen der Beeinträchtigung     Verarbeitung  Im Rahmen der Befragung werden wir Ihre personenbezogenen Daten erheben, auswerten sowie anonymisiert veröffentlichen. Nach der Datenschutz-Grundverordnung (Art 4. Nr. 2) gelten diese Vorgänge als „Verarbeitung“.  Wir löschen Ihre Angaben grundsätzlich spätestens 10 Jahre nach der Erhebung,wenn nicht ein berechtigtes Forschungsinteresse dieser Löschung entgegensteht.     Zwecke der Verarbeitung  Wir verarbeiten Ihre personenbezogenen Daten zu Zwecken der wissenschaftlichen Forschung.  Wir möchten durch die Befragung Erkenntnisse erlangen über  • Strategien und Maßnahmen zur Förderung von Vielfalt und Chancengerechtigkeit  • Bedarfe und Hindernisse bei der Förderung von Vielfalt und Chancengerechtigkeit  • das allgemeine Arbeitsklima, Diskriminierung und etwaige Erfahrungen hiermit.  Diese Erkenntnisse sollen uns helfen, neue Handlungsfelder für diversitätsorientierte Maßnahmen zu erschließen und Beispiele für entsprechende Organisationsprozesse zu identifizieren. Hierzu möchten wir die Ergebnisse der Befragung auch veröffentlichen.  Sicherheitsmaßnahmen  Die ausgewerteten Ergebnisse der Befragung veröffentlichen wir schriftlich und anonymisiert. Die Anonymisierung sorgt dafür, dass es unmöglich ist, Ihnen die Ergebnisse individuell zuzuordnen. So können insbesondere Ihre Vorgesetzten aus Ihren Antworten keinerlei Rückschlüsse auf Ihre Person ziehen.  Ihre IP-Adresse wird von den Umfragedaten getrennt und pseudonymisiert gespeichert. Sie wird nicht ausgewertet. Die pseudonymisierte Speicherung Ihrer IP-Adresse dient allein der IT-Sicherheit.  Die IP-Adresse erheben wir, indem wir einen sogenannten „Cookie“ auf Ihren Rechner setzen. Dieser wird 48 Stunden nach Ende der Befragung automatisch gelöscht. Durch den Cookie können Sie die Befragung nach einer Unterbrechung an der gleichen Stelle wiederaufnehmen. Sie können jedoch auch Cookie-frei an der Befragung teilnehmen, dafür müssen Sie nur Ihren Browser entsprechend einstellen.  Die Befragung wird mit der Open Source Software LimeSurvey umgesetzt. Zugang zu dieser passwortverschlüsselten Software haben ausschließlich Personen, die dazu jeweils projektbezogen von uns autorisiert worden sind.  Sämtliche personenbezogene Daten werden ausschließlich auf von uns betriebenen, verschlüsselten Servern in Deutschland gespeichert.        Einwilligung"
+attributes(data)$variable.labels[7] <- " Im Rahmen unserer wissenschaftlichen Befragung „Vielfalt entscheidet Thüringen“ verarbeiten wir, die Citizens For Europe („CFE“) gUG, auch Ihre personenbezogenen Daten. Wir halten uns dabei an die Datenschutz-Grundverordnung (DSGVO) und das Bundesdatenschutzgesetz (BDSG).     Personenbezogene Daten  Nach der Datenschutz-Grundverordnung (Art. 4 Nr. 1) verarbeiten wir im Rahmen dieser Befragung folgende personenbezogene Daten:  • Einrichtungszugehörigkeit innerhalb der Thüringer Landesverwaltung  • Position innerhalb der Einrichtung und ggf. Anzahl der Mitarbeitenden  • Anstellungs- und Dienstverhältnis  • Evaluation von Maßnahmen und Erhebung von Handlungsbedarfen zur Förderung von Vielfalt und Chancengerechtigkeit  • Einschätzung zum Arbeitsklima  • soziale Herkunft/sozioökonomische Lage  • ostdeutsche/westdeutsche Sozialisation  • Alter  • Geschlecht  • Migrationshintergrund  • rassistische Diskriminierung  • sexuelle Orientierung/Identität  • Glaubensgemeinschaft und Weltanschauung  • Behinderungen/Formen der Beeinträchtigung     Verarbeitung  Im Rahmen der Befragung werden wir Ihre personenbezogenen Daten erheben, auswerten sowie anonymisiert veröffentlichen. Nach der Datenschutz-Grundverordnung (Art 4. Nr. 2) gelten diese Vorgänge als „Verarbeitung“.  Wir löschen Ihre Angaben grundsätzlich spätestens 10 Jahre nach der Erhebung,wenn nicht ein berechtigtes Forschungsinteresse dieser Löschung entgegensteht.     Zwecke der Verarbeitung  Wir verarbeiten Ihre personenbezogenen Daten zu Zwecken der wissenschaftlichen Forschung.  Wir möchten durch die Befragung Erkenntnisse erlangen über  • Strategien und Maßnahmen zur Förderung von Vielfalt und Chancengerechtigkeit  • Bedarfe und Hindernisse bei der Förderung von Vielfalt und Chancengerechtigkeit  • das allgemeine Arbeitsklima, Diskriminierung und etwaige Erfahrungen hiermit.  Diese Erkenntnisse sollen uns helfen, neue Handlungsfelder für diversitätsorientierte Maßnahmen zu erschließen und Beispiele für entsprechende Organisationsprozesse zu identifizieren. Hierzu möchten wir die Ergebnisse der Befragung auch veröffentlichen.  Sicherheitsmaßnahmen  Die ausgewerteten Ergebnisse der Befragung veröffentlichen wir schriftlich und anonymisiert. Die Anonymisierung sorgt dafür, dass es unmöglich ist, Ihnen die Ergebnisse individuell zuzuordnen. So können insbesondere Ihre Vorgesetzten aus Ihren Antworten keinerlei Rückschlüsse auf Ihre Person ziehen.  Ihre IP-Adresse wird von den Umfragedaten getrennt und pseudonymisiert gespeichert. Sie wird nicht ausgewertet. Die pseudonymisierte Speicherung Ihrer IP-Adresse dient allein der IT-Sicherheit.  Die IP-Adresse erheben wir, indem wir einen sogenannten „Cookie“ auf Ihren Rechner setzen. Dieser wird 48 Stunden nach Ende der Befragung automatisch gelöscht. Durch den Cookie können Sie die Befragung nach einer Unterbrechung an der gleichen Stelle wiederaufnehmen. Sie können jedoch auch Cookie-frei an der Befragung teilnehmen, dafür müssen Sie nur Ihren Browser entsprechend einstellen.  Die Befragung wird mit der Open Source Software LimeSurvey umgesetzt. Zugang zu dieser passwortverschlüsselten Software haben ausschließlich Personen, die dazu jeweils projektbezogen von uns autorisiert worden sind.  Sämtliche personenbezogene Daten werden ausschließlich auf von uns betriebenen, verschlüsselten Servern in Deutschland gespeichert.        Einwilligung"
 data[, 7] <- factor(data[, 7], levels=c("A1"),labels=c("Ich habe die obigen Erläuterungen zum Datenschutz vollständig zur Kenntnis genommen und bin mit der vorgesehenen Verarbe"))
 names(data)[7] <- "EinwDaten"
 # LimeSurvey Field type: A
@@ -40,7 +40,7 @@ attributes(data)$variable.labels[8] <- "{if(is_empty(vigRand.NAOK), rand(1,36), 
 names(data)[8] <- "vigRand"
 # LimeSurvey Field type: A
 data[, 9] <- as.character(data[, 9])
-attributes(data)$variable.labels[9] <- "Wir werden Ihnen zunächst einige Fragen zu Ihrer Position und Ihrem Arbeitsalltag stellen.                       In welcher Art öffentlicher Einrichtung in Thüringen sind Sie tätig?    "
+attributes(data)$variable.labels[9] <- "Wir werden Ihnen zunächst einige Fragen zu Ihrer Position und Ihrem Arbeitsalltag stellen.                       In welcher Art öffentlicher Einrichtung in Thüringen sind Sie tätig?    "
 data[, 9] <- factor(data[, 9], levels=c("A1","A2","A3","A4"),labels=c("Oberste Landesbehörde", "Mittlere/obere Landesbehörde", "Untere Landesbehörde", "Einrichtungen, Körperschaften oder Anstalten des öffentlichen Rechts (z.B.: Justizvollzugsausbildungsstätte oder Studier"))
 names(data)[9] <- "artein"
 # LimeSurvey Field type: A
@@ -123,7 +123,7 @@ attributes(data)$variable.labels[25] <- "[Sonstiges] Verantworten Sie im Rahmen 
 names(data)[25] <- "beauf_other"
 # LimeSurvey Field type: F
 data[, 26] <- as.numeric(data[, 26])
-attributes(data)$variable.labels[26] <- " Haben Sie in Ihrer derzeitigen Tätigkeit Leitungs- und/oder Personalverantwortung?"
+attributes(data)$variable.labels[26] <- " Haben Sie in Ihrer derzeitigen Tätigkeit Leitungs- und/oder Personalverantwortung?"
 data[, 26] <- factor(data[, 26], levels=c(1,2),labels=c("Ja", "Nein"))
 names(data)[26] <- "leitv"
 # LimeSurvey Field type: A
@@ -167,7 +167,7 @@ data[, 34] <- factor(data[, 34], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[34] <- "persgew_SQ007"
 # LimeSurvey Field type: F
 data[, 35] <- as.numeric(data[, 35])
-attributes(data)$variable.labels[35] <- "Seit welchem Jahr arbeiten Sie für die Thüringer Verwaltung bzw. in einer  Einrichtung, Körperschaft oder Anstalt des öffentlichen Rechts?"
+attributes(data)$variable.labels[35] <- "Seit welchem Jahr arbeiten Sie für die Thüringer Verwaltung bzw. in einer  Einrichtung, Körperschaft oder Anstalt des öffentlichen Rechts?"
 names(data)[35] <- "jahrein"
 # LimeSurvey Field type: F
 data[, 36] <- as.numeric(data[, 36])
@@ -665,37 +665,37 @@ attributes(data)$variable.labels[136] <- ""
 names(data)[136] <- "stratzielgother"
 # LimeSurvey Field type: F
 data[, 137] <- as.numeric(data[, 137])
-attributes(data)$variable.labels[137] <- "[Mitarbeitende besuchen Sprachkurse.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
+attributes(data)$variable.labels[137] <- "[Mitarbeitende besuchen Sprachkurse.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
 data[, 137] <- factor(data[, 137], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[137] <- "stratikoe_SQ002"
 # LimeSurvey Field type: F
 data[, 138] <- as.numeric(data[, 138])
-attributes(data)$variable.labels[138] <- "[Die Essensangebote in der Kantine werden den Essgewohnheiten und -regeln der Mitarbeitenden zunehmend gerecht.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
+attributes(data)$variable.labels[138] <- "[Die Essensangebote in der Kantine werden den Essgewohnheiten und -regeln der Mitarbeitenden zunehmend gerecht.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
 data[, 138] <- factor(data[, 138], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[138] <- "stratikoe_SQ003"
 # LimeSurvey Field type: F
 data[, 139] <- as.numeric(data[, 139])
-attributes(data)$variable.labels[139] <- "[Diversity-Kompetenz bzw. interkulturelle Kompetenz wird als Teil des Anforderungsprofils für Mitarbeitende aktiv eingefordert.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
+attributes(data)$variable.labels[139] <- "[Diversity-Kompetenz bzw. interkulturelle Kompetenz wird als Teil des Anforderungsprofils für Mitarbeitende aktiv eingefordert.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
 data[, 139] <- factor(data[, 139], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[139] <- "stratikoe_SQ004"
 # LimeSurvey Field type: F
 data[, 140] <- as.numeric(data[, 140])
-attributes(data)$variable.labels[140] <- "[Vor Entscheidungsfindungen werden regelmäßig Akteur_innen konsultiert, die die Belange von Menschen mit Migrationshintergrund bzw. Menschen mit Rassismuserfahrungen einbringen.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
+attributes(data)$variable.labels[140] <- "[Vor Entscheidungsfindungen werden regelmäßig Akteur_innen konsultiert, die die Belange von Menschen mit Migrationshintergrund bzw. Menschen mit Rassismuserfahrungen einbringen.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
 data[, 140] <- factor(data[, 140], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[140] <- "stratikoe_SQ005"
 # LimeSurvey Field type: F
 data[, 141] <- as.numeric(data[, 141])
-attributes(data)$variable.labels[141] <- "[Es steht ein Gebets- und/oder einen Raum der Stille zur Verfügung.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
+attributes(data)$variable.labels[141] <- "[Es steht ein Gebets- und/oder einen Raum der Stille zur Verfügung.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
 data[, 141] <- factor(data[, 141], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[141] <- "stratikoe_SQ006"
 # LimeSurvey Field type: F
 data[, 142] <- as.numeric(data[, 142])
-attributes(data)$variable.labels[142] <- "[Es gibt ein Kontingent an Urlaubstagen, das Mitarbeitende für unterschiedliche religiöse Feiertage ausschöpfen können.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
+attributes(data)$variable.labels[142] <- "[Es gibt ein Kontingent an Urlaubstagen, das Mitarbeitende für unterschiedliche religiöse Feiertage ausschöpfen können.] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
 data[, 142] <- factor(data[, 142], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[142] <- "stratikoe_SQ007"
 # LimeSurvey Field type: A
 data[, 143] <- as.character(data[, 143])
-attributes(data)$variable.labels[143] <- "[Sonstiges] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
+attributes(data)$variable.labels[143] <- "[Sonstiges] Welche spezifischen Strategien und Maßnahmen zur Förderung der interkulturellen Öffnung werden in Ihrem Verantwortungsbereich umgesetzt?      Bitte beachten Sie, dass es sich hierbei um eine unvollständige Liste handelt, die u.a. in Zusammenarbeit mit der Thüringer Beauftragten für Integration, Migration und Flüchtlinge entstanden ist."
 names(data)[143] <- "stratikoe_other"
 # LimeSurvey Field type: F
 data[, 144] <- as.numeric(data[, 144])
@@ -1175,120 +1175,120 @@ attributes(data)$variable.labels[239] <- "[Sonstiges] Haben Sie weitere/zukünft
 names(data)[239] <- "planstrat_other"
 # LimeSurvey Field type: F
 data[, 240] <- as.numeric(data[, 240])
-attributes(data)$variable.labels[240] <- "[bürokratische Barrieren] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[240] <- "[bürokratische Barrieren] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 240] <- factor(data[, 240], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[240] <- "hindstrat_SQ006"
 # LimeSurvey Field type: A
 data[, 241] <- as.character(data[, 241])
-attributes(data)$variable.labels[241] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[241] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[241] <- "hindstrat_SQ006comment"
 # LimeSurvey Field type: F
 data[, 242] <- as.numeric(data[, 242])
-attributes(data)$variable.labels[242] <- "[Zeitmangel] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[242] <- "[Zeitmangel] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 242] <- factor(data[, 242], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[242] <- "hindstrat_SQ009"
 # LimeSurvey Field type: A
 data[, 243] <- as.character(data[, 243])
-attributes(data)$variable.labels[243] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[243] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[243] <- "hindstrat_SQ009comment"
 # LimeSurvey Field type: F
 data[, 244] <- as.numeric(data[, 244])
-attributes(data)$variable.labels[244] <- "[keine ausreichende finanzielle Unterstützung] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[244] <- "[keine ausreichende finanzielle Unterstützung] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 244] <- factor(data[, 244], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[244] <- "hindstrat_SQ002"
 # LimeSurvey Field type: A
 data[, 245] <- as.character(data[, 245])
-attributes(data)$variable.labels[245] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[245] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[245] <- "hindstrat_SQ002comment"
 # LimeSurvey Field type: F
 data[, 246] <- as.numeric(data[, 246])
-attributes(data)$variable.labels[246] <- "[fehlende gesetzliche Grundlage, und zwar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[246] <- "[fehlende gesetzliche Grundlage, und zwar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 246] <- factor(data[, 246], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[246] <- "hindstrat_SQ012"
 # LimeSurvey Field type: A
 data[, 247] <- as.character(data[, 247])
-attributes(data)$variable.labels[247] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[247] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[247] <- "hindstrat_SQ012comment"
 # LimeSurvey Field type: F
 data[, 248] <- as.numeric(data[, 248])
-attributes(data)$variable.labels[248] <- "[Mangel an Vielfalt wird nicht als Problem wahrgenommen] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[248] <- "[Mangel an Vielfalt wird nicht als Problem wahrgenommen] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 248] <- factor(data[, 248], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[248] <- "hindstrat_SQ003"
 # LimeSurvey Field type: A
 data[, 249] <- as.character(data[, 249])
-attributes(data)$variable.labels[249] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[249] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[249] <- "hindstrat_SQ003comment"
 # LimeSurvey Field type: F
 data[, 250] <- as.numeric(data[, 250])
-attributes(data)$variable.labels[250] <- "[weil sich unsere Einrichtung als Ganzes als neutral betrachtet] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[250] <- "[weil sich unsere Einrichtung als Ganzes als neutral betrachtet] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 250] <- factor(data[, 250], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[250] <- "hindstrat_SQ004"
 # LimeSurvey Field type: A
 data[, 251] <- as.character(data[, 251])
-attributes(data)$variable.labels[251] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[251] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[251] <- "hindstrat_SQ004comment"
 # LimeSurvey Field type: F
 data[, 252] <- as.numeric(data[, 252])
-attributes(data)$variable.labels[252] <- "[keine ausreichende Unterstützung von der (höheren) Leitungsebene] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[252] <- "[keine ausreichende Unterstützung von der (höheren) Leitungsebene] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 252] <- factor(data[, 252], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[252] <- "hindstrat_SQ005"
 # LimeSurvey Field type: A
 data[, 253] <- as.character(data[, 253])
-attributes(data)$variable.labels[253] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[253] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[253] <- "hindstrat_SQ005comment"
 # LimeSurvey Field type: F
 data[, 254] <- as.numeric(data[, 254])
-attributes(data)$variable.labels[254] <- "[kein förderliches öffentliches Meinungsklima] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[254] <- "[kein förderliches öffentliches Meinungsklima] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 254] <- factor(data[, 254], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[254] <- "hindstrat_SQ001"
 # LimeSurvey Field type: A
 data[, 255] <- as.character(data[, 255])
-attributes(data)$variable.labels[255] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[255] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[255] <- "hindstrat_SQ001comment"
 # LimeSurvey Field type: F
 data[, 256] <- as.numeric(data[, 256])
-attributes(data)$variable.labels[256] <- "[fehlende Verwaltungsrichtlinien, und zwar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[256] <- "[fehlende Verwaltungsrichtlinien, und zwar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 256] <- factor(data[, 256], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[256] <- "hindstrat_SQ011"
 # LimeSurvey Field type: A
 data[, 257] <- as.character(data[, 257])
-attributes(data)$variable.labels[257] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[257] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[257] <- "hindstrat_SQ011comment"
 # LimeSurvey Field type: F
 data[, 258] <- as.numeric(data[, 258])
-attributes(data)$variable.labels[258] <- "[es gibt nicht genügend geeignetes Personal (z. B. mit Migrationshintergrund)] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[258] <- "[es gibt nicht genügend geeignetes Personal (z. B. mit Migrationshintergrund)] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 258] <- factor(data[, 258], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[258] <- "hindstrat_SQ007"
 # LimeSurvey Field type: A
 data[, 259] <- as.character(data[, 259])
-attributes(data)$variable.labels[259] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[259] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[259] <- "hindstrat_SQ007comment"
 # LimeSurvey Field type: F
 data[, 260] <- as.numeric(data[, 260])
-attributes(data)$variable.labels[260] <- "[Das Team trägt die Maßnahmen/ Strategien nicht mit] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[260] <- "[Das Team trägt die Maßnahmen/ Strategien nicht mit] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 260] <- factor(data[, 260], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[260] <- "hindstrat_SQ008"
 # LimeSurvey Field type: A
 data[, 261] <- as.character(data[, 261])
-attributes(data)$variable.labels[261] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[261] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[261] <- "hindstrat_SQ008comment"
 # LimeSurvey Field type: F
 data[, 262] <- as.numeric(data[, 262])
-attributes(data)$variable.labels[262] <- "[andere Gründe, und zwar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[262] <- "[andere Gründe, und zwar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 262] <- factor(data[, 262], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[262] <- "hindstrat_SQ013"
 # LimeSurvey Field type: A
 data[, 263] <- as.character(data[, 263])
-attributes(data)$variable.labels[263] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[263] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[263] <- "hindstrat_SQ013comment"
 # LimeSurvey Field type: F
 data[, 264] <- as.numeric(data[, 264])
-attributes(data)$variable.labels[264] <- "[es bestand/besteht keine Notwendigkeit] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[264] <- "[es bestand/besteht keine Notwendigkeit] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 data[, 264] <- factor(data[, 264], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[264] <- "hindstrat_SQ010"
 # LimeSurvey Field type: A
 data[, 265] <- as.character(data[, 265])
-attributes(data)$variable.labels[265] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[265] <- "[Kommentar] Ihrer Erfahrung nach: Woran liegt es, wenn sich Maßnahmen und Strategien zur Förderung von Vielfalt und Chancengleichheit nicht umsetzen lassen?     Bitte kreuzen Sie nur Gründe an, die Sie selbst bereits als hinderlich erlebt haben. Mehrfachantworten sind möglich."
 names(data)[265] <- "hindstrat_SQ010comment"
 # LimeSurvey Field type: A
 data[, 266] <- as.character(data[, 266])
@@ -1300,62 +1300,62 @@ attributes(data)$variable.labels[267] <- "Welche unterstützenden Rahmenbedingun
 names(data)[267] <- "bedkeinstrat"
 # LimeSurvey Field type: A
 data[, 268] <- as.character(data[, 268])
-attributes(data)$variable.labels[268] <- "[Behinderung/ Beeinträchtigung ] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[268] <- "[Behinderung/ Beeinträchtigung ] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 268] <- factor(data[, 268], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[268] <- "mgeshand_SQ002"
 # LimeSurvey Field type: A
 data[, 269] <- as.character(data[, 269])
-attributes(data)$variable.labels[269] <- "[Geschlecht] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[269] <- "[Geschlecht] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 269] <- factor(data[, 269], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[269] <- "mgeshand_SQ004"
 # LimeSurvey Field type: A
 data[, 270] <- as.character(data[, 270])
-attributes(data)$variable.labels[270] <- "[Hohes Lebensalter] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[270] <- "[Hohes Lebensalter] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 270] <- factor(data[, 270], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[270] <- "mgeshand_SQ005"
 # LimeSurvey Field type: A
 data[, 271] <- as.character(data[, 271])
-attributes(data)$variable.labels[271] <- "[Junges Lebensalter] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[271] <- "[Junges Lebensalter] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 271] <- factor(data[, 271], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[271] <- "mgeshand_SQ006"
 # LimeSurvey Field type: A
 data[, 272] <- as.character(data[, 272])
-attributes(data)$variable.labels[272] <- "[Ostdeutsch sozialisiert] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[272] <- "[Ostdeutsch sozialisiert] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 272] <- factor(data[, 272], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[272] <- "mgeshand_SQ007"
 # LimeSurvey Field type: A
 data[, 273] <- as.character(data[, 273])
-attributes(data)$variable.labels[273] <- "[Westdeutsch sozialisiert] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[273] <- "[Westdeutsch sozialisiert] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 273] <- factor(data[, 273], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[273] <- "mgeshand_SQ013"
 # LimeSurvey Field type: A
 data[, 274] <- as.character(data[, 274])
-attributes(data)$variable.labels[274] <- "[Religion ] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[274] <- "[Religion ] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 274] <- factor(data[, 274], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[274] <- "mgeshand_SQ008"
 # LimeSurvey Field type: A
 data[, 275] <- as.character(data[, 275])
-attributes(data)$variable.labels[275] <- "[Sexuelle Orientierung / Identität] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[275] <- "[Sexuelle Orientierung / Identität] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 275] <- factor(data[, 275], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[275] <- "mgeshand_SQ009"
 # LimeSurvey Field type: A
 data[, 276] <- as.character(data[, 276])
-attributes(data)$variable.labels[276] <- "[Ethnische Herkunft/ rassistische Diskriminierung] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[276] <- "[Ethnische Herkunft/ rassistische Diskriminierung] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 276] <- factor(data[, 276], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[276] <- "mgeshand_SQ003"
 # LimeSurvey Field type: A
 data[, 277] <- as.character(data[, 277])
-attributes(data)$variable.labels[277] <- "[Soziale Herkunft / sozio-ökonomische Lage] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[277] <- "[Soziale Herkunft / sozio-ökonomische Lage] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 277] <- factor(data[, 277], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[277] <- "mgeshand_SQ010"
 # LimeSurvey Field type: A
 data[, 278] <- as.character(data[, 278])
-attributes(data)$variable.labels[278] <- "[Körpergewichtsdiskriminierung] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[278] <- "[Körpergewichtsdiskriminierung] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 278] <- factor(data[, 278], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[278] <- "mgeshand_SQ011"
 # LimeSurvey Field type: A
 data[, 279] <- as.character(data[, 279])
-attributes(data)$variable.labels[279] <- "[andere, und zwar] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
+attributes(data)$variable.labels[279] <- "[andere, und zwar] Wie hoch schätzen Sie den gesellschaftlichen Handlungsbedarf zur Förderung von  Chancengerechtigkeit für die folgenden Dimensionen ein? Bitte geben Sie ihre Einschätzung an auf einer Skala von 1 = überhaupt nicht wichtig bis 5 = absolut notwendig."
 data[, 279] <- factor(data[, 279], levels=c("A1","A2","A3","A4","A5","A6"),labels=c("1=überhaupt nicht wichtig", "von geringer Bedeutung", "von mittlerer Bedeutung", "sehr wichtig", "5=absolut notwendig", "weiß nicht / keine Einschätzung"))
 names(data)[279] <- "mgeshand_SQ012"
 # LimeSurvey Field type: A
@@ -1732,7 +1732,7 @@ data[, 355] <- factor(data[, 355], levels=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
 names(data)[355] <- "vigOptions3"
 # LimeSurvey Field type: F
 data[, 356] <- as.numeric(data[, 356])
-attributes(data)$variable.labels[356] <- "[Bitte schieben Sie den Regler auf die im Bildungssystem insgesamt verbrachten Jahre.] Wie viele Jahre haben Sie das Bildungssystem4 in der DDR besucht?   "
+attributes(data)$variable.labels[356] <- "[Bitte schieben Sie den Regler auf die im Bildungssystem insgesamt verbrachten Jahre.] Wie viele Jahre haben Sie das Bildungssystem4 in der DDR besucht?   "
 names(data)[356] <- "bildalt_SQ001"
 # LimeSurvey Field type: F
 data[, 357] <- as.numeric(data[, 357])
@@ -1759,7 +1759,7 @@ data[, 361] <- factor(data[, 361], levels=c("A2","A3","A4","A5","A6","A7","A8","
 names(data)[361] <- "einkgr"
 # LimeSurvey Field type: A
 data[, 362] <- as.character(data[, 362])
-attributes(data)$variable.labels[362] <- "Stellen Sie sich bitte eine Leiter mit 10 Sprossen vor, die Ihre persönliche Einschätzung zu Ihrer Position in der Gesellschaft darstellen soll.  Wo würden Sie sich auf der Leiter platzieren?     10= höchste Bildung, höchstes Einkommen und höchstes berufliches Ansehen  1= niedrige Bildung, niedriges Einkommen und geringes berufliches Ansehen"
+attributes(data)$variable.labels[362] <- "Stellen Sie sich bitte eine Leiter mit 10 Sprossen vor, die Ihre persönliche Einschätzung zu Ihrer Position in der Gesellschaft darstellen soll.  Wo würden Sie sich auf der Leiter platzieren?     10= höchste Bildung, höchstes Einkommen und höchstes berufliches Ansehen  1= niedrige Bildung, niedriges Einkommen und geringes berufliches Ansehen"
 data[, 362] <- factor(data[, 362], levels=c("A1","A2","A3","A4","A5","A6","A7","A8","A9","A10"),labels=c("10", "9", "8", "7", "6", "5", "4", "3", "2", "1"))
 names(data)[362] <- "sozstatus"
 # LimeSurvey Field type: A
@@ -2040,87 +2040,87 @@ attributes(data)$variable.labels[418] <- "[Sonstiges] Was glauben Sie, in Bezug 
 names(data)[418] <- "fremdwahrbez_other"
 # LimeSurvey Field type: F
 data[, 419] <- as.numeric(data[, 419])
-attributes(data)$variable.labels[419] <- "[Weiß] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[419] <- "[Weiß] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 419] <- factor(data[, 419], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[419] <- "selbstbez_SQ001"
 # LimeSurvey Field type: F
 data[, 420] <- as.numeric(data[, 420])
-attributes(data)$variable.labels[420] <- "[Person of Colour ] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[420] <- "[Person of Colour ] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 420] <- factor(data[, 420], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[420] <- "selbstbez_SQ002"
 # LimeSurvey Field type: F
 data[, 421] <- as.numeric(data[, 421])
-attributes(data)$variable.labels[421] <- "[Schwarz] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[421] <- "[Schwarz] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 421] <- factor(data[, 421], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[421] <- "selbstbez_SQ003"
 # LimeSurvey Field type: F
 data[, 422] <- as.numeric(data[, 422])
-attributes(data)$variable.labels[422] <- "[Afrodeutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[422] <- "[Afrodeutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 422] <- factor(data[, 422], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[422] <- "selbstbez_SQ008"
 # LimeSurvey Field type: F
 data[, 423] <- as.numeric(data[, 423])
-attributes(data)$variable.labels[423] <- "[Jüdisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[423] <- "[Jüdisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 423] <- factor(data[, 423], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[423] <- "selbstbez_SQ004"
 # LimeSurvey Field type: F
 data[, 424] <- as.numeric(data[, 424])
-attributes(data)$variable.labels[424] <- "[Russischsprachig Jüdisch ] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[424] <- "[Russischsprachig Jüdisch ] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 424] <- factor(data[, 424], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[424] <- "selbstbez_SQ005"
 # LimeSurvey Field type: F
 data[, 425] <- as.numeric(data[, 425])
-attributes(data)$variable.labels[425] <- "[Russlanddeutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[425] <- "[Russlanddeutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 425] <- factor(data[, 425], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[425] <- "selbstbez_SQ012"
 # LimeSurvey Field type: F
 data[, 426] <- as.numeric(data[, 426])
-attributes(data)$variable.labels[426] <- "[Deutsch-Kasachisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[426] <- "[Deutsch-Kasachisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 426] <- factor(data[, 426], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[426] <- "selbstbez_SQ017"
 # LimeSurvey Field type: F
 data[, 427] <- as.numeric(data[, 427])
-attributes(data)$variable.labels[427] <- "[Muslimisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[427] <- "[Muslimisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 427] <- factor(data[, 427], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[427] <- "selbstbez_SQ006"
 # LimeSurvey Field type: F
 data[, 428] <- as.numeric(data[, 428])
-attributes(data)$variable.labels[428] <- "[Sinti und Roma] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[428] <- "[Sinti und Roma] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 428] <- factor(data[, 428], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[428] <- "selbstbez_SQ007"
 # LimeSurvey Field type: F
 data[, 429] <- as.numeric(data[, 429])
-attributes(data)$variable.labels[429] <- "[Vietnamesisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[429] <- "[Vietnamesisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 429] <- factor(data[, 429], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[429] <- "selbstbez_SQ014"
 # LimeSurvey Field type: F
 data[, 430] <- as.numeric(data[, 430])
-attributes(data)$variable.labels[430] <- "[Asiatisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[430] <- "[Asiatisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 430] <- factor(data[, 430], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[430] <- "selbstbez_SQ010"
 # LimeSurvey Field type: F
 data[, 431] <- as.numeric(data[, 431])
-attributes(data)$variable.labels[431] <- "[Arabisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[431] <- "[Arabisch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 431] <- factor(data[, 431], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[431] <- "selbstbez_SQ009"
 # LimeSurvey Field type: F
 data[, 432] <- as.numeric(data[, 432])
-attributes(data)$variable.labels[432] <- "[Polnisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[432] <- "[Polnisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 432] <- factor(data[, 432], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[432] <- "selbstbez_SQ011"
 # LimeSurvey Field type: F
 data[, 433] <- as.numeric(data[, 433])
-attributes(data)$variable.labels[433] <- "[Türkisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[433] <- "[Türkisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 433] <- factor(data[, 433], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[433] <- "selbstbez_SQ013"
 # LimeSurvey Field type: F
 data[, 434] <- as.numeric(data[, 434])
-attributes(data)$variable.labels[434] <- "[Ukrainisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[434] <- "[Ukrainisch-Deutsch] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 data[, 434] <- factor(data[, 434], levels=c(1,0),labels=c("Ja", "Nicht Gewählt"))
 names(data)[434] <- "selbstbez_SQ015"
 # LimeSurvey Field type: A
 data[, 435] <- as.character(data[, 435])
-attributes(data)$variable.labels[435] <- "[Sonstiges] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
+attributes(data)$variable.labels[435] <- "[Sonstiges] Welche der folgenden (Selbst-)Bezeichnungen trifft am ehesten auf Sie zu?  Diese Liste orientiert sich an den geografischen Bezügen und Selbstbezeichnungen von zahlenmäßig großen Gruppen in Deutschland und Thüringen sowie an den nach der UN-Antirassismuskonvention schutzwürdigen Gruppen. Da sich diese Bezeichnungen mit der Zeit ändern, fragen wir danach, welche „am ehesten“ für Sie passend erscheinen.Die Liste ist nicht vollständig und kann im letzten Feld - auch durch andere Schreibweisen - ergänzt werden.      Mehrfachantworten sind möglich."
 names(data)[435] <- "selbstbez_other"
 # LimeSurvey Field type: F
 data[, 436] <- as.numeric(data[, 436])
@@ -2275,5 +2275,4 @@ names(data)[466] <- "endurl"
 # Variable name was incorrect and was changed from  to q_ .
 
 saveRDS(data, file = paste(outpath, "example_data.rds", sep = "/"))
-        
-        
+
