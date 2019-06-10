@@ -1,4 +1,5 @@
 ---
+title: "Aufbereitung des Diversity Profiles"
 author: "Lisa Reiber"
 date: "7 6 2019"
 output: 
@@ -18,94 +19,10 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = T)
 source(file = ".path.R")
-
-select_mc <- function(data, searchterm, id = 1) {
-      
-      quo_searchterm <- quo(searchterm)
-      if (id == TRUE) {
-            data %>% select(contains((!!quo_searchterm)), -contains("other"), id)
-      } else if (id == FALSE) {
-            data %>% select(contains((!!quo_searchterm)), -contains("other"))
-      }
-}
-      
-tidy_mc = function(data, searchterm, kind = 2) {
-      
-      select_mc(data, searchterm) %>% 
-            gather(key = var, value = answer , -id) %>% 
-            arrange(id)
-}
-
- frq_mc = function(data, searchterm, kind = 2) {
-    
-      if (kind == 1) {
-            data %>% 
-                  tidy_mc(searchterm) %>% 
-                  tabyl(answer, var) 
-      } else if (kind == 2) {
-            data %>% 
-            tidy_mc(searchterm) %>% 
-                  tabyl(var, answer) %>% 
-                  adorn_percentages() %>% 
-                  adorn_rounding(digits = 2) 
-      }
-}
-
-my_barplot = function(data = raw1, variable) {
-      
-     ggplot(data = data, aes_string(x = variable) ) +
-          geom_bar() +
-          theme_bw(base_size = 14) 
-}
-
-barplot_mc = function(data, searchterm) {
-      
-      plot_vars <- names(data %>% select_mc(searchterm, id = 0))
-      #plot_vars <- names(!!quo_vars)
-      all_plots = pmap(list((plot_vars)), ~ my_barplot(data, variable = .x))
-      all_plots
-      
-}
-
-frqplot_mc = function(data  = raw1, searchterm, version = 1) {
-      
-      if (version == 1) {
-            data %>% 
-            tidy_mc(searchterm) %>% 
-            ggplot(aes(x = answer, fill = var)) +
-            geom_bar(position = "dodge") +
-            facet_wrap(~ var, scales = "free_x") +
-            theme(legend.position = "none")
-      } else if (version == 2) {
-            data %>% 
-            tidy_mc(searchterm) %>% 
-            ggplot(aes(x = var, fill = answer)) +
-            geom_bar(position = "dodge") +
-            facet_wrap(~ answer) +
-            coord_flip() +
-            theme(legend.position = "none")
-      }
-}
-
-get_info = function(data, searchterm, var_name = 1, val_name = 1) {
-      
-       # filter für variablennamen die "lebsit" enthalten
-       var_label <- names(data)[grepl(searchterm, attributes(data)$names)]
-       # filter für die passenden variablen labels
-       val_label <- attributes(data)$variable.labels[grepl(searchterm, attributes(data)$names)]
-       
-       if (var_name == 1 & val_name == 1) {
-             cat(paste0("Variable ", var_label, ": \n", " Value Label: ", val_label, " \n \n"))
-       } else if (var_name == 0 & val_name == 1) {
-             cat(paste0("Value Label: ", val_label, " \n \n"))
-       } else if (var_name == 1 & val_name == 0) {
-             cat(paste0("Variable ", var_label, ": \n"))
-       }
-}
-
+source(file = "functions.R")
 ```
 
-# Aufbereitung des Diversity Profiles
+# Generierung der Profiles
 
 Zuerst werden die nötigen Pakete geladen und die Roh-Daten eingelesen:
 ```{r}
@@ -769,8 +686,6 @@ cowplot::plot_grid(plotlist = barplot_mc(raw1, "beeint"),
 
 **Generate New Variable**
 
-
-
 Für das Diversity Profile wird eine Variable erstellt, die dichotom zwischen Beeinträchtigung und keine Beeinträchtigung unterscheidet
 ```{r}
 
@@ -813,7 +728,7 @@ zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension S
 
 
 
-#### SSS
+#### 1. SSS
 Hier gibt es Informationen in Bezug auf den subjektiven sozialen Status (sss) `sozstatus`.
 Die Variable sollte auch von Faktor zu metrischem Vektor umgewandelt werden.
 ```{r}
@@ -822,21 +737,21 @@ raw8 %>% select(sozstatus) %>% str()
 
 ```
 
-#### Einkommen
+#### 2. Einkommen
 Außerdem gibt es Informationen zum Einkommen `einkgr`und `neteink`
 ```{r}
 raw8 %>% count(einkgr)
 # raw8 %>% count(neteink)
 ```
 
-#### Beruf
+#### 3. Beruf
 
 Und Informationen zum Berufsstatus `aktberuf`
 ```{r}
 raw8 %>% count(aktberuf)
 ```
 
-#### Bildung
+#### 4. Bildung
 
 Und Informationen zur Bildung: den Bildungsabschluss `bildab` und Anzahl der Schuljahre `bildneu`und `bildalt`
 ```{r}
@@ -846,7 +761,7 @@ raw8 %>%
 
 ```
 
-#### Lebenssituation
+#### 5. Lebenssituation
 
 Informationen zur Lebenssituation `lebsit`
 ```{r}
@@ -862,20 +777,19 @@ cat(paste0("Variable ",
        attributes(raw1)$variable.labels[grepl("lebsit", attributes(raw1)$names)]," \n \n")
     )
 ```
- 
 
 
 ### Plot Raw Data
 
 **Visualize Raw Data**
 
-#### SSS
+#### 1. SSS
 
 ```{r}
 raw8 %>% frqplot_mc("sozstatus")
 ```
 
-#### Einkommen
+#### 2. Einkommen
 Außerdem gibt es Informationen zum Einkommen `einkgr`und `neteink`.
 
       Note: Neteink ist momentan nicht im Datensatz vorhanden
@@ -894,34 +808,30 @@ raw8 %>% select(einkgr) %>%
 #       theme(legend.position = "none")
 ```
 
-#### Beruf
+#### 3. Beruf
 
 Und Informationen zum Berufsstatus `aktberuf`
 ```{r}
 
 ```
 
-#### Bildung
+#### 4. Bildung
 
 Und Informationen zur Bildung: den Bildungsabschluss `bildab` und Anzahl der Schuljahre `bildneu`und `bildalt`
 ```{r}
 
 ```
 
-#### Lebenssituation
+#### 5. Lebenssituation
 
 Informationen zur Lebenssituation `lebsit`
 ```{r}
 raw8 %>% frq_mc("lebsit")
 ```
 
-
-
-### Variable_XXX {.active}
+### Generate SES {.active}
 
 **Generate New Variable**
-
-#### SSS
 
 ```{r}
 levels(raw8$aktberuf)
@@ -960,7 +870,7 @@ raw9 <- raw8 %>%
                    grepl(levels(raw8$aktberuf)[12], aktberuf) ~ 6.2,
                    grepl(levels(raw8$aktberuf)[13], aktberuf) ~ 4.7,
                    TRUE ~ NA_real_),
-             eink_score = case_when(# recode aktberuf
+             eink_score = case_when(# recode einkgr
                    grepl(levels(raw8$einkgr)[1], einkgr) ~ 1.0,
                    grepl(levels(raw8$einkgr)[2], einkgr) ~ 1.5,
                    grepl(levels(raw8$einkgr)[3], einkgr) ~ 2.0,
@@ -1023,12 +933,12 @@ raw9 <- raw8 %>%
 lasst uns die neuen Variablen ansehen
 ```{r}
 raw9 %>% select(
-      isei, isei_score, # Beruf
+      isei, isei_score,           # Beruf
       casmin, casmin_score,       # Bildung
-      eink_score,      # einkommen
-      care,       # lebessituation
-      sozstatus, sss,       # Sozialer Status
-      ses_score, ses       # Sozioökonomischer Status
+      eink_score,                 # einkommen
+      care,                       # lebessituation
+      sozstatus, sss,             # Sozialer Status
+      ses_score, ses              # Sozioökonomischer Status
       ) %>% 
       skim()
 ```
@@ -1038,7 +948,7 @@ raw9 %>% select(
 
 ```{r}
 
-data_processed <- raw6
+data_processed <- raw9
 saveRDS(data_processed, file = paste(outpath, "data_processed.rds", sep = "/"))
 
 ```
