@@ -8,7 +8,7 @@ output:
     toc_float: true
     toc_depth: 3
     number_sections: true
-    code_folding: show
+    code_folding: hide
     df_print: kable
     theme: spacelab
     highlight: pygments
@@ -17,7 +17,8 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = T)
+knitr::opts_chunk$set(echo = TRUE, cache = T, warning = F, comment = "")
+
 source(file = "../.path.R")
 source(file = "functions.R")
 ```
@@ -27,7 +28,7 @@ source(file = "functions.R")
 Zuerst werden die nötigen Pakete geladen und die Roh-Daten eingelesen:
 ```{r}
 pacman::p_load(tidyverse, forcats, janitor, haven, skimr)
-raw1 <- readRDS(file = "data/example_data.rds")
+raw1 <- readRDS(file = "../data/example_data.rds")
 ```
 
 Nun gibt es verschiedene Dimensionen, die in dem Diversity Profile erfasst werden sollen.
@@ -95,7 +96,7 @@ frqplot_mc(raw1, "gender", version =  2)
 **Generate New Variable**
 
 Wir wollen eine Gender Variable `binary` erstellen, die in Binär vs. Non-Binär unterscheidet
-```{r}
+```{r, echo = T}
 raw2 <- raw1 %>% 
       mutate(binary = case_when(# binär = weiblich, männlich
                                     gender_SQ001 == "Ja" | gender_SQ002 == "Ja" ~ "binär",
@@ -113,11 +114,16 @@ raw2 <- raw1 %>%
 ```
 
 Lets take a look!
-```{r}
+
+Die Häufigkeiten
+```{r warning=F}
 raw2 %>% janitor::tabyl(binary, female)
-raw2 %>% skim(binary, female)
 ```
 
+Und meta Informationen
+```{r}
+raw2 %>% select(binary, female) %>% skim_to_wide() %>% select(-type, -ordered) 
+```
 
 ## sexuelle Orientierung {.tabset}
 Hier geht es um Informationen, die etwas mit der sexuelle Diskriminierungs-Dimension des Diversity Profils zu tun haben.
@@ -137,7 +143,7 @@ raw2 %>% frq_mc("sexo", 1)
 ```
 
 und wir können und auch die Value Labels der Variablen anzeigen lassen
-```{r}
+```{r, comment = ""}
 get_info(raw1, "sexo")
 ```
 
@@ -146,7 +152,8 @@ get_info(raw1, "sexo")
 **Visualize Raw Data**
 
 Visualisierung der Variablen mit Bezug zur Gender-Dimention durch die `barplot_mc` Funktionen.
-```{r, fig.width = 3, fig.height=3}
+(Visualisierung auskommentiert, da so viele einzelne plots)
+```{r eval=FALSE, fig.height=3, fig.width=3}
 
 barplot_mc(raw2, "sexo")
 ```
@@ -314,7 +321,7 @@ raw5 %>% count(mh)
 ```
 
 wir lassen uns die kompletten Value Labels anzeigen
-```{r}
+```{r, comment = ""}
 levels(raw5$mh)
 ```
 
@@ -373,7 +380,7 @@ raw6 <- raw5 %>%
              vertriebene = factor(vertriebene, c("Vertriebene"))
              )
  
-raw6 %>% skim(contains("mh"), -contains("mhandab"), refu_gen, vertriebene)
+raw6 %>% select(contains("mh"), -contains("mhandab"), refu_gen, vertriebene) %>% skim_to_wide() %>% select(-type, -ordered) 
 # raw6 %>% select(contains("mh"), -contains("mhandab"), refu_gen, vertriebene) %>% View()
 
 ```
@@ -389,11 +396,11 @@ Die Variable rassistische Diskriminierung wird durch mehrere der Variblen in den
 3. Fremdwahrnehmung und Merkmal: `fremdwahr == c(3,5)` UND  `fremdwahrbez == 1 OR 7`
 4. Selbstbezeichnung `selbstbez == c(2,3,5,7,8,9,10, 11,12,20)`
 
-### Info Raw Data
+### Info Raw Data {.tabset}
 
 **Describe Raw Data**
 
-#### 1. allgemeine Diskriminierung:
+#### allgemeine Diskriminierung:
 
 ersteinmal herausfinden, welche der `diskallg` Variablen sich auf rassistische Diskriminierung und den befristeten Aufenthaltsstatus beziehen:
 
@@ -427,13 +434,13 @@ rassdisk_frq %>% tabyl(var, answer) %>%
       adorn_rounding(digits = 2) 
 ```
 
-#### 2. Fremdwahrnehmung
+#### Fremdwahrnehmung
 
 Weiter zur Fremdwahrnehmung:
 
 Hier gibt es eine Generelle Frage zur Fremdwahrnehmung `fremdwahr`.
 ```{r}
-raw6 %>% select(contains("fremdwahr")) %>% skim()
+raw6 %>% select(contains("fremdwahr")) %>% skim_to_wide() %>% select(-type, -ordered) 
 ```
 
 ```{r}
@@ -478,7 +485,7 @@ fremdwahrbez_frq %>% tabyl(var, answer) %>%
       adorn_rounding(digits = 2) 
 ```
 
-#### 3. Selbstbezeichnung
+#### Selbstbezeichnung
 
 ersteinmal herausfinden, welche der `selbstbez_SQ00` Variablen sich auf rassistische Diskriminierung und den befristeten Aufenthaltsstatus beziehen:
 
@@ -525,11 +532,11 @@ selbstbez_frq %>% tabyl(var, answer) %>%
       adorn_rounding(digits = 2) 
 ```
 
-### Plot Raw Data
+### Plot Raw Data {.tabset}
 
 **Visualize Raw Data**
 
-#### 1. allgemeine Diskriminierung
+#### allgemeine Diskriminierung
 ```{r}
 rassdisk_frq %>% 
       ggplot(aes(x = answer, fill = var)) +
@@ -545,7 +552,7 @@ rassdisk_frq %>%
       theme(legend.position = "none")
 ```
 
-#### 2. Fremdwahrnehmung
+#### Fremdwahrnehmung
 ```{r}
 raw1 %>% 
       tidy_mc("fremdwahr") %>% 
@@ -569,7 +576,7 @@ fremdwahrbez_frq %>%
       theme(legend.position = "none")
 ```
 
-#### 3. Selbstbezeichnung
+#### Selbstbezeichnung
 ```{r}
 selbstbez_frq %>% 
       ggplot(aes(x = answer, fill = var)) +
@@ -627,7 +634,7 @@ raw7 <- raw6 %>% mutate(
 raw7 %>% tabyl(rassdisk)
 ```
 
-## Beeinträchtigung
+## Beeinträchtigung {.tabset}
 
 zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension Beeinträchtigung des Diversity Profils zu tun haben `beeint`und `beeintwas`
 
@@ -652,7 +659,7 @@ raw7 %>% count(beeintaus)
 raw7 %>% count(gradbeh)
 
 raw7 %>% select(beeint, beeintaus, beh, gradbeh) %>% str()
-raw7 %>% select(beeint, beeintaus, beh, gradbeh) %>% skim()
+raw7 %>% select(beeint, beeintaus, beh, gradbeh) %>% skim_to_wide() %>% select(-type, -ordered) 
 
 ```
 
@@ -668,18 +675,16 @@ frq_mc(data = raw7, "beeintwas", 1)
 
 **Visualize Raw Data**
 
-Nun sehen wir uns die spezifischen Ausprägungen als Visualisierung an:
+Wir können uns alle Barplots der einzelnen Items `beeintw` zusammengefügt angucken.
+
+Sortiert nach Variablen: 
 ```{r}
-# barplot_mc(raw7, "beeintwas")
 frqplot_mc(raw7, "beeintwas")
-frqplot_mc(raw7, "beeintwas",2)
 ```
 
-Wir können uns alle Barplots der einzelnen Items `beeintw` zusammengefügt angucken
+Oder nach Antworten:
 ```{r}
-cowplot::plot_grid(plotlist = barplot_mc(raw1, "beeint"),
-          labels = "AUTO",
-          align = "hv")
+frqplot_mc(raw7, "beeintwas", version = 2)
 ```
 
 ### Beeinträchtigung {.active}
@@ -711,24 +716,22 @@ Check neue generierte Variablen
 ```{r}
 # raw8 %>% select(beeint_d, schwerbeh_d, gradbeh) %>% View()
 
-raw8 %>% select(beeint_d, schwerbeh_d, gradbeh) %>% skim()
+raw8 %>% select(beeint_d, schwerbeh_d, gradbeh) %>% skim_to_wide() %>% select(-type, -ordered) 
 
 raw8 %>% tabyl(beeint_d)
 raw8 %>% tabyl(schwerbeh_d)
 raw8 %>% tabyl(beeint_d, schwerbeh_d)
 ```
 
-## SES
+## SES {.tabset}
 
 zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension Sozioökonomischer Status des Diversity Profils zu tun haben
 
-### Info Raw Data
+### Info Raw Data {.tabset}
 
 **Describe Raw Data**
 
-
-
-#### 1. SSS
+#### SSS
 Hier gibt es Informationen in Bezug auf den subjektiven sozialen Status (sss) `sozstatus`.
 Die Variable sollte auch von Faktor zu metrischem Vektor umgewandelt werden.
 ```{r}
@@ -737,21 +740,21 @@ raw8 %>% select(sozstatus) %>% str()
 
 ```
 
-#### 2. Einkommen
+#### Einkommen
 Außerdem gibt es Informationen zum Einkommen `einkgr`und `neteink`
 ```{r}
 raw8 %>% count(einkgr)
 # raw8 %>% count(neteink)
 ```
 
-#### 3. Beruf
+#### Beruf
 
 Und Informationen zum Berufsstatus `aktberuf`
 ```{r}
 raw8 %>% count(aktberuf)
 ```
 
-#### 4. Bildung
+#### Bildung
 
 Und Informationen zur Bildung: den Bildungsabschluss `bildab` und Anzahl der Schuljahre `bildneu`und `bildalt`
 ```{r}
@@ -761,7 +764,7 @@ raw8 %>%
 
 ```
 
-#### 5. Lebenssituation
+#### Lebenssituation
 
 Informationen zur Lebenssituation `lebsit`
 ```{r}
@@ -779,17 +782,17 @@ cat(paste0("Variable ",
 ```
 
 
-### Plot Raw Data
+### Plot Raw Data {.tabset}
 
 **Visualize Raw Data**
 
-#### 1. SSS
+#### SSS
 
 ```{r}
 raw8 %>% frqplot_mc("sozstatus")
 ```
 
-#### 2. Einkommen
+#### Einkommen
 Außerdem gibt es Informationen zum Einkommen `einkgr`und `neteink`.
 
       Note: Neteink ist momentan nicht im Datensatz vorhanden
@@ -808,21 +811,21 @@ raw8 %>% select(einkgr) %>%
 #       theme(legend.position = "none")
 ```
 
-#### 3. Beruf
+#### Beruf
 
 Und Informationen zum Berufsstatus `aktberuf`
 ```{r}
 
 ```
 
-#### 4. Bildung
+#### Bildung
 
 Und Informationen zur Bildung: den Bildungsabschluss `bildab` und Anzahl der Schuljahre `bildneu`und `bildalt`
 ```{r}
 
 ```
 
-#### 5. Lebenssituation
+#### Lebenssituation
 
 Informationen zur Lebenssituation `lebsit`
 ```{r}
@@ -940,7 +943,7 @@ raw9 %>% select(
       sozstatus, sss,             # Sozialer Status
       ses_score, ses              # Sozioökonomischer Status
       ) %>% 
-      skim()
+      skim_to_wide() %>% select(-type, -ordered) 
 ```
 
 
@@ -949,14 +952,19 @@ raw9 %>% select(
 ```{r}
 
 data_processed <- raw9
-saveRDS(data_processed, file = paste(outpath, "data_processed.rds", sep = "/"))
+saveRDS(data_processed, file = paste("..", outpath, "data_processed.rds", sep = "/"))
 
 ```
 
-# Cut Outs
+***********************************************************
+# Supplements {.tabset}
+
+## in den anderen tabs sind hilfreiche Websites zu den Inhalten des Markdowns zu finden,
+sowie code, der im Prozess rausgeschmissen wurde, aber in Zukunft noch praktisch sien könnte.
+## Cut Outs
 
 Gender: if you want a tibble as output
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(contains("gender"), -contains("other")) %>% 
@@ -969,7 +977,7 @@ raw1 %>% count(gender_SQ001)
 ```
 
 other wy of calculating frequency tables
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 gender_frq <- raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(contains("gender"), -contains("other")) %>% 
@@ -988,7 +996,7 @@ gender_frq %>%
 ```
 
 and an even shorter way
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(id, contains("gender"), -contains("other")) %>%
@@ -1001,7 +1009,7 @@ raw1 %>%
       adorn_ns()
 ```
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 gender_frq <- raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(contains("gender"), -contains("other")) %>% 
@@ -1021,7 +1029,7 @@ gender_frq %>%
 ```
 
 filter nachdem tidy_mc benutzt wurde
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 fremdwahr_frq <- raw6 %>% 
       tidy_mc("fremdwahr") %>% 
       filter(var == "fremdwahr")
@@ -1032,7 +1040,7 @@ fremdwahr_frq %>% tabyl(var, answer) %>%
 ```
 
 another way to recode factors
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 case_when(  mh == paste(levels(raw5$mh)[1]) |
             mh == paste(levels(raw5$mh)[2]) | 
             mh == paste(levels(raw5$mh)[3]) | 
@@ -1055,7 +1063,7 @@ cowplot::plot_grid(plotlist = barplot_mc(raw1, "gender"),
 ```
 
 
-# help
+## sources / help
 
 - purrr: https://stackoverflow.com/questions/49989741/error-using-dplyrcount-within-purrrmap
 - purrr: https://stackoverflow.com/questions/43013175/function-to-generate-multiple-htmltables-using-purrrmap
@@ -1063,27 +1071,27 @@ cowplot::plot_grid(plotlist = barplot_mc(raw1, "gender"),
 - writing functions in dplyr: https://www.r-bloggers.com/programming-with-dplyr-by-using-dplyr/
 - programming in dplyr: https://dplyr.tidyverse.org/articles/programming.html
 
-# template structure
+## template structure
 
-## Dimension_XXX
+<!-- ## Dimension_XXX -->
 
-zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension rassistische Diskriminierung des Diversity Profils zu tun haben
+<!-- zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension rassistische Diskriminierung des Diversity Profils zu tun haben -->
 
-### Info Raw Data
+<!-- ### Info Raw Data -->
 
-**Describe Raw Data**
-
-
-
-### Plot Raw Data
-
-**Visualize Raw Data**
+<!-- **Describe Raw Data** -->
 
 
 
-### Variable_XXX {.active}
+<!-- ### Plot Raw Data -->
 
-**Generate New Variable**
+<!-- **Visualize Raw Data** -->
+
+
+
+<!-- ### Variable_XXX {.active} -->
+
+<!-- **Generate New Variable** -->
 
 
 
