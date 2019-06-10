@@ -1,11 +1,12 @@
 ---
-title: "Untitled"
 author: "Lisa Reiber"
 date: "7 6 2019"
 output: 
   html_document:
     toc: true
     toc_float: true
+    toc_depth: 3
+    number_sections: true
     code_folding: show
     df_print: kable
     theme: spacelab
@@ -16,17 +17,103 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = T)
+source(file = ".path.R")
+
+select_mc <- function(data, searchterm, id = 1) {
+      
+      quo_searchterm <- quo(searchterm)
+      if (id == TRUE) {
+            data %>% select(contains((!!quo_searchterm)), -contains("other"), id)
+      } else if (id == FALSE) {
+            data %>% select(contains((!!quo_searchterm)), -contains("other"))
+      }
+}
+      
+tidy_mc = function(data, searchterm, kind = 2) {
+      
+      select_mc(data, searchterm) %>% 
+            gather(key = var, value = answer , -id) %>% 
+            arrange(id)
+}
+
+ frq_mc = function(data, searchterm, kind = 2) {
+    
+      if (kind == 1) {
+            data %>% 
+                  tidy_mc(searchterm) %>% 
+                  tabyl(answer, var) 
+      } else if (kind == 2) {
+            data %>% 
+            tidy_mc(searchterm) %>% 
+                  tabyl(var, answer) %>% 
+                  adorn_percentages() %>% 
+                  adorn_rounding(digits = 2) 
+      }
+}
+
+my_barplot = function(data = raw1, variable) {
+      
+     ggplot(data = data, aes_string(x = variable) ) +
+          geom_bar() +
+          theme_bw(base_size = 14) 
+}
+
+barplot_mc = function(data, searchterm) {
+      
+      plot_vars <- names(data %>% select_mc(searchterm, id = 0))
+      #plot_vars <- names(!!quo_vars)
+      all_plots = pmap(list((plot_vars)), ~ my_barplot(data, variable = .x))
+      all_plots
+      
+}
+
+frqplot_mc = function(data  = raw1, searchterm, version = 1) {
+      
+      if (version == 1) {
+            data %>% 
+            tidy_mc(searchterm) %>% 
+            ggplot(aes(x = answer, fill = var)) +
+            geom_bar(position = "dodge") +
+            facet_wrap(~ var, scales = "free_x") +
+            theme(legend.position = "none")
+      } else if (version == 2) {
+            data %>% 
+            tidy_mc(searchterm) %>% 
+            ggplot(aes(x = var, fill = answer)) +
+            geom_bar(position = "dodge") +
+            facet_wrap(~ answer) +
+            coord_flip() +
+            theme(legend.position = "none")
+      }
+}
+
+get_info = function(data, searchterm, var_name = 1, val_name = 1) {
+      
+       # filter für variablennamen die "lebsit" enthalten
+       var_label <- names(data)[grepl(searchterm, attributes(data)$names)]
+       # filter für die passenden variablen labels
+       val_label <- attributes(data)$variable.labels[grepl(searchterm, attributes(data)$names)]
+       
+       if (var_name == 1 & val_name == 1) {
+             cat(paste0("Variable ", var_label, ": \n", " Value Label: ", val_label, " \n \n"))
+       } else if (var_name == 0 & val_name == 1) {
+             cat(paste0("Value Label: ", val_label, " \n \n"))
+       } else if (var_name == 1 & val_name == 0) {
+             cat(paste0("Variable ", var_label, ": \n"))
+       }
+}
+
 ```
 
-# Aufbereitung des Diversity Profils
+# Aufbereitung des Diversity Profiles
 
-Zuerst werden die nötigen Pakete geladen und Daten eingelesen:
+Zuerst werden die nötigen Pakete geladen und die Roh-Daten eingelesen:
 ```{r}
 pacman::p_load(tidyverse, forcats, janitor, haven, skimr)
 raw1 <- readRDS(file = "data/example_data.rds")
 ```
 
-Nun gibt es verschiedene Dimensionen, die von dem Diversity Profil erfasst werden sollen.
+Nun gibt es verschiedene Dimensionen, die in dem Diversity Profile erfasst werden sollen.
 
       - Gender, 
       - sexuelle Orientierung, 
@@ -35,70 +122,62 @@ Nun gibt es verschiedene Dimensionen, die von dem Diversity Profil erfasst werde
       - Migrationshintergrund, 
       - rass. Diskriminierte Menschen, 
       - Beeinträchtigung, 
-      - SES,
+      - SES
 
 Diese Variablen werden jetzt in den einzelnen Abschnitten erarbeitet bzw. bearbeitet, bis sie die gewünschte Form erreichen.
+In den folgenden Abschnitten bezieht sich der offene Tab auf die Generierung der betreffenden Variablen, während in den anderen Tabs die Häufigkeiten und Visualisierungen vorhanden sind.
 
 ## Gender {.tabset}
 
-zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Gender Dimension des Diversity Profils zu tun haben
+Hier geht es um Informationen, die etwas mit der Gender Dimension des Diversity Profils zu tun haben
 
 ### Info Raw Data
 
 **Describe Raw Data**
 
----
+Da haben wir zum Einen die Variablen, die das wort `gender` im Variablennamen haben
 
-Da haben wir zum Einen die Variablen, die das wort `gender' im Variablennamen haben
+Wir können uns mit der Funktion `frq_mc` die Häufigkeitstabellen für die Multiple Choice (_mc) Variablen einer Gruppe ausgeben lassen
 ```{r}
 # raw1 %>% select(contains("gender"), -contains("other")) %>% View()
 
-gender_frq <- raw1 %>% 
-      select(id, contains("gender"), -contains("other")) %>%
-      gather(key = var, value = answer , -id) %>% 
-      arrange(id)
- 
-gender_frq %>% tabyl(answer, var) 
+raw1 %>% frq_mc("gender", 1)
+raw1 %>% frq_mc("gender", 2)
 
-gender_frq %>% tabyl(var, answer) %>% 
-      adorn_percentages() %>% 
-      adorn_rounding(digits = 12) 
+```
+
+und wir können und auch die Value Labels der Variablen anzeigen lassen
+```{r}
+get_info(raw1, "gender")
 ```
 
 ### Plot Raw Data
 
-** Visualize Raw Data **
+**Visualize Raw Data**
 
----
-
-wir können das auch visualisieren
+Visualisierung der Variablen mit Bezug zur Gender-Dimention durch die `barplot_mc` Funktionen.
 ```{r, fig.width = 3, fig.height=3}
-my_plot = function(variable) {
-     ggplot(raw1, aes_string(x = variable) ) +
-          geom_bar() +
-          theme_bw(base_size = 14) 
-}
 
-gender_vars <- names(raw1 %>% select(contains("gender"), -contains("other")))
-
-all_plots = pmap(list(gender_vars), my_plot)
-all_plots
+barplot_mc(raw1, "gender") 
 ```
 
-Wir können uns alle Grafiken zusammengefügt angucken
+Wir können uns mit der `frqplot_mc` Funktion alle Grafiken zusammengefügt angucken.
+Sortiert nach Variable:
 ```{r}
-cowplot::plot_grid(plotlist = all_plots,
-          labels = "AUTO",
-          align = "hv")
+frqplot_mc(raw1, "gender", version = 1)
+```
+
+und sortiert nach Antwort:
+```{r}
+frqplot_mc(raw1, "gender", version =  2)
+
 ```
 
 ### Binär: Gender {.active}
 
 **Generate New Variable**
 
----
-
-Wir wollen eine gender Variable `binary' erstellen, die in Binär vs. Non-Binär unterscheidet
+Wir wollen eine Gender Variable `binary` erstellen, die in Binär vs. Non-Binär unterscheidet
 ```{r}
 raw2 <- raw1 %>% 
       mutate(binary = case_when(# binär = weiblich, männlich
@@ -114,89 +193,69 @@ raw2 <- raw1 %>%
                                 gender_SQ003 == "Ja" ~ "male"),
              female = factor(female, c("female", "male"))
       )
+```
 
+Lets take a look!
+```{r}
 raw2 %>% janitor::tabyl(binary, female)
 raw2 %>% skim(binary, female)
 ```
 
+
 ## sexuelle Orientierung {.tabset}
-zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension: sexuelle Diskriminierung des Diversity Profils zu tun haben
+Hier geht es um Informationen, die etwas mit der sexuelle Diskriminierungs-Dimension des Diversity Profils zu tun haben.
 
 ### Info Raw Data
 
 **Describe Raw Data**
 
----
-
-Da haben wir zum Einen die Variablen, die das wort `sexo' im Variablennamen haben
+Da haben wir zum Einen die Variablen, die das wort `sexo` im Variablennamen haben.
+Wir können uns mit der Funktion `frq_mc` die Häufigkeitstabellen für die Multiple Choice (_mc) Variablen einer Gruppe ausgeben lassen
 ```{r}
-# raw1 %>% select(contains("gender"), -contains("other")) %>% View()
+# raw1 %>% select_mc("gender") %>% View()
 
-sexo_frq <- raw1 %>% 
-      select(id, contains("sexo"), -contains("other")) %>%
-      gather(key = var, value = answer , -id) %>% 
-      arrange(id)
- 
-sexo_frq %>% tabyl(answer, var) 
+raw2 %>% frq_mc("sexo")
+raw2 %>% frq_mc("sexo", 1)
 
-sexo_frq %>% tabyl(var, answer) %>% 
-      adorn_percentages() %>% 
-      adorn_rounding(digits = 12) 
+```
 
+und wir können und auch die Value Labels der Variablen anzeigen lassen
+```{r}
+get_info(raw1, "sexo")
 ```
 
 ### Plot Raw Data
 
-** Visualize Raw Data **
+**Visualize Raw Data**
 
----
-
-wir können das auch visualisieren
+Visualisierung der Variablen mit Bezug zur Gender-Dimention durch die `barplot_mc` Funktionen.
 ```{r, fig.width = 3, fig.height=3}
-my_plot = function(variable) {
-     ggplot(raw2, aes_string(x = variable) ) +
-          geom_bar() +
-          theme_bw(base_size = 14) 
-}
 
-sexo_vars <- names(raw1 %>% select(contains("sexo"), -contains("other")))
-
-all_plots = pmap(list(gender_vars), my_plot)
-all_plots
+barplot_mc(raw2, "sexo")
 ```
 
-Wir können uns alle Grafiken zusammengefügt angucken
+Wir können uns mit der `frqplot_mc` Funktion alle Grafiken zusammengefügt angucken.
+Einmal sortiert nach Variable:
 ```{r}
-cowplot::plot_grid(plotlist = all_plots,
-          labels = "AUTO",
-          align = "hv")
+frqplot_mc(raw2, "sexo")
 ```
 
+Und einmal sortiert nach Antworten:
 ```{r}
-sexo_frq %>% 
-      ggplot(aes(x = answer, fill = var)) +
-      geom_bar(position = "dodge") +
-      facet_wrap(~ var, scales = "free_x") +
-      theme(legend.position = "none")
-
-sexo_frq %>% 
-      ggplot(aes(x = var, fill = answer)) +
-      geom_bar(position = "dodge") +
-      facet_wrap(~ answer) +
-      coord_flip() +
-      theme(legend.position = "none")
+frqplot_mc(raw1, "sexo", 2)
 ```
 
 ### Binär: Sexuelle Orientierung {.active}
 
 **Generate New Variable**
 
----
+Wir wollen eine gender Variable `binary` erstellen, die in Binär vs. Non-Binär unterscheidet.
 
-Wir wollen eine gender Variable `binary' erstellen, die in Binär vs. Non-Binär unterscheidet
+      Note: auch nach weiblich/männlich unterscheiden? #question
+      
 ```{r}
 raw3 <- raw2 %>% 
-      mutate(lgbtiq = case_when(# binär = weiblich, männlich
+      mutate(lgbtiq = case_when(# lgbtiq = bisexuell, lesbisch, homosexuell, queer, schwul
                                     sexo_SQ003 == "Ja" | 
                                     sexo_SQ004 == "Ja" |
                                     sexo_SQ006 == "Ja" |
@@ -207,7 +266,7 @@ raw3 <- raw2 %>%
                                     # sexo_SQ002 == "Ja" | ???
                                     sexo_SQ005 == "Ja"   ~ "nicht-lgbtiq",
                                   TRUE ~ NA_character_ ),
-             binary = factor(binary, c("lgbtiq", "nicht-lgbtiq"))
+             lgbtiq = factor(lgbtiq, c("lgbtiq", "nicht-lgbtiq"))
       )
 
 raw3 %>% janitor::tabyl(lgbtiq)
@@ -215,15 +274,15 @@ raw3 %>% janitor::tabyl(lgbtiq)
 
 
 ## Ost {.tabset}
-zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension Ost des Diversity Profils zu tun haben
+Hier geht es um Informationen, die etwas mit der Dimension Ost des Diversity Profils zu tun haben
 
 ### Info Raw Data
 
 **Describe Raw Data**
 
----
+Da haben wir zum Einen die Variablen, die das wort `gebort` im Variablennamen haben.
+Wir sehen, dass die Variable sehr lange Value Labels hat. Daher kürzen wir sie später um.
 
-Da haben wir zum Einen die Variablen, die das wort `gebort' im Variablennamen haben.
 ```{r}
 # raw3 %>% select(gebort) %>% View()
 # häufigkeiten anzeigen
@@ -234,32 +293,28 @@ levels(raw3$gebort)
 
 ```
 
+
 ### Plot Raw Data
 
-** Visualize Raw Data **
-
----
+**Visualize Raw Data**
 
 wir können das auch visualisieren
 ```{r}
 raw3 %>%
-      select(id, gebort) %>% 
-      gather(var, answer, -id) %>% 
+      tidy_mc("gebort") %>% 
       ggplot(aes(x = var, fill = answer)) +
       geom_bar(position = "dodge") +
       theme(legend.position = "top") +
       scale_fill_discrete(guide = guide_legend(nrow = 3, title.position = "top"))
+
 ```
 
 ### Binär: Ost {.active}
 
 **Generate New Variable**
 
----
+Wir wollen eine Geburtsort Variable `ost` erstellen, die in Ost vs. West unterscheidet.
 
-Wir wollen eine gender Variable `binary' erstellen, die in Binär vs. Non-Binär unterscheidet
-
-Wir sehen, dass die Variable sehr lange Value Labels hat. Daher benennen wir sie um.
 ```{r}
 raw4 <- raw3 %>% 
       mutate(ost = case_when(grepl('DDR', gebort)  ~ "Ost",
@@ -276,32 +331,33 @@ raw4 %>% tabyl(ost)
 
 ## Age {.tabset}
 
+Hier geht es um Informationen, die etwas mit der Alters-Dimension des Diversity Profils zu tun haben.
+
 ### Info Raw Data
 
 **Describe Raw Data**
 
----
-
-Das Alter kann durch das Erhebungsjahr und das Geburtsjahr erstellt werden.
+Das Alter kann durch das Erhebungsjahr (2019) und das Geburtsjahr `gebjahr` erstellt werden.
 ```{r}
-raw4$gebjahr %>% str()
+raw4 %>% select(gebjahr) %>% str()
+
+raw4 %>% tabyl(gebjahr) %>% 
+      adorn_rounding(digits = 2) 
 ```
 
-Wir sehen, dass es ein Faktor ist, obwohl es eigentlich besser durch eine numerische variable dargestellt wird. das ändern wir
-
+Wir sehen, dass es ein Faktor ist, obwohl es eigentlich besser durch eine numerische variable dargestellt wird. Das ändern wir später.
 
 ### Plot Raw Data
 
-** Visualize Raw Data **
-
----
+**Visualize Raw Data**
 
 Altersstruktur als Plot
-```{r}
+```{r, fig.height= 4, fig.width=3}
 raw4 %>% 
       mutate(age = 2019 - as.numeric(as.character(gebjahr))) %>% 
-      ggplot(aes(1, fill = factor(age))) +
-      geom_bar(position = "dodge") 
+      ggplot(aes(factor(age), fill = factor(age))) +
+      geom_bar(position = "dodge") +
+      coord_flip()
 
 raw4 %>% 
       mutate(age = 2019 - as.numeric(as.character(gebjahr))) %>%
@@ -317,38 +373,39 @@ raw4 %>%
 
 **Generate New Variable**
 
----
-
 ```{r}
 raw5 <- raw4 %>% 
       mutate(age = 2019 - as.numeric(as.character(gebjahr)))
+```
 
+Check out the new Variable!
+```{r}
 raw5 %>% count(age)
 ```
 
 ## Migrationshintergrund {.tabset}
 
+Hier geht es um Informationen, die etwas mit der Dimension Migrationshintergrund zu tun haben:
+
 ### Info Raw Data
 
 **Describe Raw Data**
 
----
-
-Zuerst sehen wir uns die Roh-Daten an, die etwas mit der Dimension Migrationshintergrund zu tun haben:
-
 Wir sehen, dass die Variable wieder sehr lange Value Labels hat.
 ```{r}
 raw5 %>% count(mh)
+```
 
-raw5$mh %>% levels()
+wir lassen uns die kompletten Value Labels anzeigen
+```{r}
+levels(raw5$mh)
 ```
 
 ### Plot Raw Data
 
-** Visualize Raw Data **
+**Visualize Raw Data**
 
----
-
+Eine Visualisierung, die das Anzeigen der langen Labels ermöglicht:
 ```{r}
 raw5 %>%
       select(id, mh) %>% 
@@ -363,11 +420,16 @@ raw5 %>%
 
 **Generate New Variable**
 
----
-
+Jetzt generieren wir Variablen:
+ 
+      - die dichotome Variable für Migrationshintergrund `mh_d` und
+      - die Migrationsvariable, die sich auf die Generation bezieht `mhgen` und 
+      - die Fluchtvariable, die sich auf die Generation bezieht `refugen`
+      
 ```{r}
 raw6 <- raw5 %>% 
-      mutate(mh_d = case_when(grepl(levels(raw5$mh)[1], mh)  |
+      mutate(# Dichotome Migrationsvariable erstellen
+             mh_d = case_when(grepl(levels(raw5$mh)[1], mh)  |
                               grepl(levels(raw5$mh)[2], mh)  |
                               grepl(levels(raw5$mh)[3], mh)  |
                               grepl(levels(raw5$mh)[4], mh)  |
@@ -376,10 +438,599 @@ raw6 <- raw5 %>%
                               grepl(levels(raw5$mh)[7], mh)  ~ "kein Migrationshintergrund",
                              TRUE ~ NA_character_),
              # aus dem Character Vector einen Faktor machen:
-             mh_d = factor(mh_d, c("Migrationshintergrund", "kein Migrationshintergrund"))
+             mh_d = factor(mh_d, c("Migrationshintergrund", "kein Migrationshintergrund")),
+             # Migration nach Generation generieren
+             mh_gen = case_when(grepl(levels(raw5$mh)[1], mh) ~ "1. Generation",
+                                grepl(levels(raw5$mh)[2], mh) ~ "2. Generation",
+                                grepl(levels(raw5$mh)[3], mh) ~ "3. Generation",
+                                TRUE ~ NA_character_),
+             mh_gen = factor(mh_gen, c("1. Generation", "2. Generation", "3. Generation")),
+             # refugee nach Generation generieren
+             refu_gen = case_when(grepl(levels(raw5$mh)[4], mh) ~ "1. Generation",
+                                  grepl(levels(raw5$mh)[5], mh) ~ "2. Generation",
+                                  grepl(levels(raw5$mh)[6], mh) ~ "3. Generation",
+                                TRUE ~ NA_character_),
+             refu_gen = factor(refu_gen, c("1. Generation", "2. Generation", "3. Generation")),
+             vertriebene  = case_when(grepl(levels(raw5$mh)[7], mh) ~ "1. Generation",
+                                      TRUE ~ NA_character_),
+             vertriebene = factor(vertriebene, c("Vertriebene"))
              )
  
-raw6 %>% tabyl(mh_d)
+raw6 %>% skim(contains("mh"), -contains("mhandab"), refu_gen, vertriebene)
+# raw6 %>% select(contains("mh"), -contains("mhandab"), refu_gen, vertriebene) %>% View()
+
+```
+
+## Rassistische Diskriminierung {.tabset}
+
+Hier geht es um Informationen, die etwas mit der Dimension rassistische Diskriminierung des Diversity Profils zu tun haben
+
+Die Variable rassistische Diskriminierung wird durch mehrere der Variblen in den Roh-Daten erstellt
+
+1. allgemeine Diskriminierung ethnische Herkunft/rassistische Gründe: `diskallgRass  == c(1,2)`
+2. befristeter Aufenthalt: `diskallgBefr == c(1,2)`
+3. Fremdwahrnehmung und Merkmal: `fremdwahr == c(3,5)` UND  `fremdwahrbez == 1 OR 7`
+4. Selbstbezeichnung `selbstbez == c(2,3,5,7,8,9,10, 11,12,20)`
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+#### 1. allgemeine Diskriminierung:
+
+ersteinmal herausfinden, welche der `diskallg` Variablen sich auf rassistische Diskriminierung und den befristeten Aufenthaltsstatus beziehen:
+
+Dafür müssen wir aus die Variablen Labels zurückgreifen, da die Variablennamen nichts aussagen
+```{r}
+rassdisk_subset <- raw1[,grepl("diskallg", attributes(raw1)$names) & 
+                         grepl("Ethnische Herkunft|Befristeter Aufenthaltstitel",
+                               attributes(raw1)$variable.labels)]
+# rassdisk_subset %>% View()
+
+cat(paste0("Variable ", 
+       names(raw1)[grepl("diskallg", attributes(raw1)$names) & 
+                         grepl("Ethnische Herkunft|Befristeter Aufenthaltstite", attributes(raw1)$variable.labels)], ": \n",
+       attributes(raw1)$variable.labels[grepl("diskallg", attributes(raw1)$names) & 
+                         grepl("Ethnische Herkunft|Befristeter Aufenthaltstite", attributes(raw1)$variable.labels)]," \n \n")
+    )
+```
+
+Jetzt können wir die Häufigkeiten ausgeben
+```{r}
+rassdisk_frq <- raw6 %>% 
+      select(id, names(rassdisk_subset)) %>% 
+      mutate_if(is.factor, ~as.numeric(as.character(.))) %>% 
+      gather(key = var, value = answer , -id) %>% 
+      arrange(id)
+ 
+rassdisk_frq %>% tabyl(answer, var) 
+
+rassdisk_frq %>% tabyl(var, answer) %>% 
+      adorn_percentages() %>% 
+      adorn_rounding(digits = 2) 
+```
+
+#### 2. Fremdwahrnehmung
+
+Weiter zur Fremdwahrnehmung:
+
+Hier gibt es eine Generelle Frage zur Fremdwahrnehmung `fremdwahr`.
+```{r}
+raw6 %>% select(contains("fremdwahr")) %>% skim()
+```
+
+```{r}
+raw6 %>% tabyl(fremdwahr) %>% 
+      adorn_rounding(digits = 2) 
+```
+
+Danach wird erfragt, auf was sich die Diskriminierung bezieht. `fremdwahrbez_SQ001-9`
+Für diese Variablen müssen wir ersteinmal herausfinden, welche der Variablen sich auf rassistische Diskriminierung und den befristeten Aufenthaltsstatus beziehen:
+
+Dafür müssen wir aus die Variablen Labels zurückgreifen, da die Variablennamen nichts aussagen
+```{r}
+fremdwahrbez_subset <- raw1[,grepl("fremdwahr", attributes(raw1)$names) & 
+                         grepl("Hautfarbe|religiösen", attributes(raw1)$variable.labels)]
+# fremdwahrbez_subset %>% View()
+
+cat(paste0( 
+      "Variable ", 
+      names(fremdwahrbez_subset),
+      ": \n", " Value Label: ",
+      attributes(raw1)$variable.labels[
+            grepl("fremdwahr", attributes(raw1)$names) & 
+            grepl("Hautfarbe|religiösen", 
+            attributes(raw1)$variable.labels)]
+      ," \n \n")
+    )
+```
+
+
+Jetzt können wir die Häufigkeiten ausgeben
+```{r warning=FALSE}
+fremdwahrbez_frq <- raw6 %>% 
+      select(id, names(fremdwahrbez_subset)) %>% 
+      mutate_if(is.factor, ~ as.numeric(as.character(.))) %>% 
+      gather(key = var, value = answer , -id) %>% 
+      arrange(id)
+ 
+fremdwahrbez_frq %>% tabyl(answer, var) 
+
+fremdwahrbez_frq %>% tabyl(var, answer) %>% 
+      adorn_percentages() %>% 
+      adorn_rounding(digits = 2) 
+```
+
+#### 3. Selbstbezeichnung
+
+ersteinmal herausfinden, welche der `selbstbez_SQ00` Variablen sich auf rassistische Diskriminierung und den befristeten Aufenthaltsstatus beziehen:
+
+Dafür müssen wir aus die Variablen Labels zurückgreifen, da die Variablennamen nichts aussagen
+```{r}
+selbstbez_find <- c("Person of Colour", "Schwarz", "\\[Jüdisch", 
+                     "Muslimisch", "Sinti und Roma", "Afrodeutsch",
+                     "Vietnamesisch-Deutsch", "Arabisch", "Asiatisch-Deutsch",
+                     "Türkisch-Deutsch")
+
+selbstbez_subset <- raw1[, grepl("selbstbez", attributes(raw1)$names) & 
+                           grepl(paste(selbstbez_find, collapse = "|"), 
+                                 attributes(raw1)$variable.labels)
+                         ]
+
+# selbstbez_subset %>% View()
+
+cat(paste0(
+      "Variable ", 
+      names(raw1)[
+             grepl("selbstbez", attributes(raw1)$names) & 
+                   grepl(paste(selbstbez_find, collapse = "|"),
+                         attributes(raw1)$variable.labels)], 
+      ": \n", " Value Label: ",
+       attributes(raw1)$variable.labels[
+             grepl("selbstbez", attributes(raw1)$names) &
+                   grepl(paste(selbstbez_find, collapse = "|"),
+                         attributes(raw1)$variable.labels)]," \n \n")
+    )
+```
+
+Jetzt können wir die Häufigkeiten ausgeben
+```{r warning=FALSE}
+selbstbez_frq <- raw6 %>% 
+      select(id, names(selbstbez_subset)) %>% 
+      mutate_if(is.factor, ~ as.numeric(as.character(.))) %>% 
+      gather(key = var, value = answer , -id) %>% 
+      arrange(id)
+ 
+selbstbez_frq %>% tabyl(answer, var) 
+
+selbstbez_frq %>% tabyl(var, answer) %>% 
+      adorn_percentages() %>% 
+      adorn_rounding(digits = 2) 
+```
+
+### Plot Raw Data
+
+**Visualize Raw Data**
+
+#### 1. allgemeine Diskriminierung
+```{r}
+rassdisk_frq %>% 
+      ggplot(aes(x = answer, fill = var)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ var, scales = "free_x") +
+      theme(legend.position = "none")
+
+rassdisk_frq %>% 
+      ggplot(aes(x = var, fill = answer)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ answer) +
+      coord_flip() +
+      theme(legend.position = "none")
+```
+
+#### 2. Fremdwahrnehmung
+```{r}
+raw1 %>% 
+      tidy_mc("fremdwahr") %>% 
+      filter(var == "fremdwahr") %>% 
+      ggplot(aes(x = answer, fill = var)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ var, scales = "free_x") +
+      theme(legend.position = "none")
+
+fremdwahrbez_frq %>% 
+      ggplot(aes(x = answer, fill = var)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ var, scales = "free_x") +
+      theme(legend.position = "none")
+
+fremdwahrbez_frq %>% 
+      ggplot(aes(x = var, fill = answer)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ answer) +
+      coord_flip() +
+      theme(legend.position = "none")
+```
+
+#### 3. Selbstbezeichnung
+```{r}
+selbstbez_frq %>% 
+      ggplot(aes(x = answer, fill = var)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ var, scales = "free_x") +
+      theme(legend.position = "none")
+
+selbstbez_frq %>% 
+      ggplot(aes(x = var, fill = answer)) +
+      geom_bar(position = "dodge") +
+      facet_wrap(~ answer) +
+      coord_flip() +
+      theme(legend.position = "none")
+```
+
+### Rassistische Diskriminierung {.active}
+
+**Generate New Variable**
+
+```{r echo=TRUE}
+names(rassdisk_subset)
+
+raw7 <- raw6 %>% mutate(
+          diskallg = case_when(
+            diskallg_SQ005_A1 == "Ja" | 
+            diskallg_SQ005_A2 == "Ja" |
+            diskallg_SQ016_A1 == "Ja" |
+            diskallg_SQ016_A2 == "Ja" ~ "rassistische Diskriminierung"),
+          fremdwahrbez = case_when(
+            (fremdwahr == "gelegentlich" & fremdwahrbez_w1 == "Ja"| fremdwahrbez_w7 == "Ja") |
+            (fremdwahr == "oft" & fremdwahrbez_w1 == "Ja" | fremdwahrbez_w7 == "Ja") |
+            (fremdwahr == "(fast) imer" & fremdwahrbez_w1 == "Ja"| fremdwahrbez_w7 == "Ja") 
+                                      ~ "rassistische Diskriminierung"),
+          selbstbez = case_when(
+                selbstbez_SQ002 == "Ja" |
+                selbstbez_SQ003 == "Ja" |
+                selbstbez_SQ008 == "Ja" |
+                selbstbez_SQ004 == "Ja" |
+                selbstbez_SQ006 == "Ja" |
+                selbstbez_SQ007 == "Ja" |
+                selbstbez_SQ014 == "Ja" |
+                selbstbez_SQ010 == "Ja" |
+                selbstbez_SQ009 == "Ja" |
+                selbstbez_SQ013 == "Ja" ~ "rassistische Diskriminierung"),
+          rassdisk = case_when(# Dichotome rassistische Diskriminierungsvariable erstellen
+                diskallg == "rassistische Diskriminierung" |
+                fremdwahrbez == "rassistische Diskriminierung" |
+                selbstbez == "rassistische Diskriminierung" ~ "rassistische Diskriminierung"),
+          diskallg = factor(diskallg, c("rassistische Diskriminierung")),
+          fremdwahrbez = factor(fremdwahrbez, c("rassistische Diskriminierung")),
+          selbstbez = factor(selbstbez, c("rassistische Diskriminierung")),
+          rassdisk = factor(rassdisk, c("rassistische Diskriminierung"))
+          )
+
+raw7 %>% tabyl(rassdisk)
+```
+
+## Beeinträchtigung
+
+zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension Beeinträchtigung des Diversity Profils zu tun haben `beeint`und `beeintwas`
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+
+
+Es gibt Informationen zur generellen Beeinträchtigung `beeint` und ob eine amtliche Behinderung vorliegt `beh`
+
+```{r}
+raw7 %>% count(beeint)
+raw7 %>% count(beh)
+
+```
+
+Außerdem Informationen zum Grad der Beeinträchtigung `beeintaus` und der Behinderung `gradbeh` vor.
+Wir können sehen, dass der Grad der Behinderung als Faktor codiert ist, obwohl er durch einen numerischen Wert besser abgebildet wäre.
+```{r}
+raw7 %>% count(beeintaus)
+raw7 %>% count(gradbeh)
+
+raw7 %>% select(beeint, beeintaus, beh, gradbeh) %>% str()
+raw7 %>% select(beeint, beeintaus, beh, gradbeh) %>% skim()
+
+```
+
+Und spezifisch um welche Beeinträchtigung es sich handelt `beeintwas`
+Hier gibt es wieder mehrere Variablen, da es sich um eine Mehrfachantwort handelt
+
+```{r}
+frq_mc(data = raw7, "beeintwas") 
+frq_mc(data = raw7, "beeintwas", 1)
+```
+
+### Plot Raw Data
+
+**Visualize Raw Data**
+
+Nun sehen wir uns die spezifischen Ausprägungen als Visualisierung an:
+```{r}
+# barplot_mc(raw7, "beeintwas")
+frqplot_mc(raw7, "beeintwas")
+frqplot_mc(raw7, "beeintwas",2)
+```
+
+Wir können uns alle Barplots der einzelnen Items `beeintw` zusammengefügt angucken
+```{r}
+cowplot::plot_grid(plotlist = barplot_mc(raw1, "beeint"),
+          labels = "AUTO",
+          align = "hv")
+```
+
+### Beeinträchtigung {.active}
+
+**Generate New Variable**
+
+
+
+Für das Diversity Profile wird eine Variable erstellt, die dichotom zwischen Beeinträchtigung und keine Beeinträchtigung unterscheidet
+```{r}
+
+raw8 <- raw7 %>% 
+      mutate(# dichotome Variable zur Beeinträchtigung
+             beeint_d = case_when(beeint == "Ja" ~ "beeinträchtigt",
+                                  beeint == "Nein" ~ "nicht beeinträchtigt",
+                                  TRUE ~ NA_character_),
+             beeint_d = factor(beeint_d, c("beeinträchtigt", "nicht beeinträchtigt")),
+             # keine Angabe auf NULL setzen
+             gradbeh = fct_recode(gradbeh, NULL = "Ich möchte meine Behinderung nicht näher beschreiben."),
+             # in numerischen vaktor formatieren
+             gradbeh = as.numeric(as.character(gradbeh)),
+             schwerbeh_d = case_when(gradbeh >= 50 & gradbeh <= 100 ~ "schwerbehindert",
+                                  !is.na(gradbeh) & gradbeh < 5 ~ "nicht schwerbehindert",
+                                  TRUE ~ NA_character_),
+             schwerbeh_d = factor(schwerbeh_d, c("schwerbehindert", "nicht schwerbehindert"))
+      )
+
+```
+
+Check neue generierte Variablen
+```{r}
+# raw8 %>% select(beeint_d, schwerbeh_d, gradbeh) %>% View()
+
+raw8 %>% select(beeint_d, schwerbeh_d, gradbeh) %>% skim()
+
+raw8 %>% tabyl(beeint_d)
+raw8 %>% tabyl(schwerbeh_d)
+raw8 %>% tabyl(beeint_d, schwerbeh_d)
+```
+
+## SES
+
+zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension Sozioökonomischer Status des Diversity Profils zu tun haben
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+
+
+#### SSS
+Hier gibt es Informationen in Bezug auf den subjektiven sozialen Status (sss) `sozstatus`.
+Die Variable sollte auch von Faktor zu metrischem Vektor umgewandelt werden.
+```{r}
+raw8 %>% count(sozstatus)
+raw8 %>% select(sozstatus) %>% str()
+
+```
+
+#### Einkommen
+Außerdem gibt es Informationen zum Einkommen `einkgr`und `neteink`
+```{r}
+raw8 %>% count(einkgr)
+# raw8 %>% count(neteink)
+```
+
+#### Beruf
+
+Und Informationen zum Berufsstatus `aktberuf`
+```{r}
+raw8 %>% count(aktberuf)
+```
+
+#### Bildung
+
+Und Informationen zur Bildung: den Bildungsabschluss `bildab` und Anzahl der Schuljahre `bildneu`und `bildalt`
+```{r}
+raw8 %>% 
+      select_mc("bild", id = 0) %>%
+      map(~count(data.frame(x =.x), x)) 
+
+```
+
+#### Lebenssituation
+
+Informationen zur Lebenssituation `lebsit`
+```{r}
+raw8 %>% frq_mc("lebsit")
+```
+
+Lasst uns die Variablen Labels der verschiedenen Variablen ansehen
+```{r}
+cat(paste0("Variable ", 
+       # filter für variablennamen die "lebsit" enthalten
+       names(raw1)[grepl("lebsit", attributes(raw1)$names)], ": \n",
+       # filter für die passenden variablen labels
+       attributes(raw1)$variable.labels[grepl("lebsit", attributes(raw1)$names)]," \n \n")
+    )
+```
+ 
+
+
+### Plot Raw Data
+
+**Visualize Raw Data**
+
+#### SSS
+
+```{r}
+raw8 %>% frqplot_mc("sozstatus")
+```
+
+#### Einkommen
+Außerdem gibt es Informationen zum Einkommen `einkgr`und `neteink`.
+
+      Note: Neteink ist momentan nicht im Datensatz vorhanden
+      
+```{r}
+raw8 %>% select(einkgr) %>% 
+      ggplot(aes(x = einkgr, fill = einkgr)) +
+      geom_bar() +
+      coord_flip() +
+      theme(legend.position = "none")
+
+# raw8 %>% select(neteink) %>% 
+#       ggplot(aes(x = einkgr, fill = einkgr)) +
+#       geom_bar() +
+#       coord_flip() +
+#       theme(legend.position = "none")
+```
+
+#### Beruf
+
+Und Informationen zum Berufsstatus `aktberuf`
+```{r}
+
+```
+
+#### Bildung
+
+Und Informationen zur Bildung: den Bildungsabschluss `bildab` und Anzahl der Schuljahre `bildneu`und `bildalt`
+```{r}
+
+```
+
+#### Lebenssituation
+
+Informationen zur Lebenssituation `lebsit`
+```{r}
+raw8 %>% frq_mc("lebsit")
+```
+
+
+
+### Variable_XXX {.active}
+
+**Generate New Variable**
+
+#### SSS
+
+```{r}
+levels(raw8$aktberuf)
+raw9 <- raw8 %>% 
+      mutate(sss = as.numeric(as.character(sozstatus)),
+             # hier kommt noch neteink hin
+             isei = case_when(# recode aktberuf
+                   grepl(levels(raw8$aktberuf)[1], aktberuf) |
+                   grepl(levels(raw8$aktberuf)[2], aktberuf) ~ "SES1 [1,3]",
+                   grepl(levels(raw8$aktberuf)[3], aktberuf) ~ "SES2 [1,8]",
+                   # grepl(levels(raw8$aktberuf)[4], aktberuf) ~ "SES3 [2,0]", fehlt momentan noch
+                   grepl(levels(raw8$aktberuf)[4], aktberuf) ~ "SES4 [2,1]",
+                   grepl(levels(raw8$aktberuf)[5], aktberuf) ~ "SES5 [2,4]",
+                   grepl(levels(raw8$aktberuf)[6], aktberuf) ~ "SES6 [2,9]",
+                   grepl(levels(raw8$aktberuf)[7], aktberuf) ~ "SES7 [4,1]",
+                   grepl(levels(raw8$aktberuf)[8], aktberuf) ~ "SES8 [5,2]",
+                   grepl(levels(raw8$aktberuf)[9], aktberuf) ~ "SES9 [6,4]",
+                   grepl(levels(raw8$aktberuf)[10], aktberuf) ~ "SES10 [2,4]",
+                   grepl(levels(raw8$aktberuf)[11], aktberuf) ~ "SES11 [3,6]",
+                   grepl(levels(raw8$aktberuf)[12], aktberuf) ~ "SES12 [6,2]",
+                   grepl(levels(raw8$aktberuf)[13], aktberuf) ~ "SES13 [4,7]",
+                   TRUE ~ NA_character_),
+             isei_score = case_when(# recode aktberuf
+                   grepl(levels(raw8$aktberuf)[1], aktberuf) |
+                   grepl(levels(raw8$aktberuf)[2], aktberuf) ~ 1.3,
+                   grepl(levels(raw8$aktberuf)[3], aktberuf) ~ 1.8,
+                   # grepl(levels(raw8$aktberuf)[4], aktberuf) ~ 2.0, fehlt momentan noch
+                   grepl(levels(raw8$aktberuf)[4], aktberuf) ~ 2.1,
+                   grepl(levels(raw8$aktberuf)[5], aktberuf) ~ 2.4,
+                   grepl(levels(raw8$aktberuf)[6], aktberuf) ~ 2.9,
+                   grepl(levels(raw8$aktberuf)[7], aktberuf) ~ 4.1,
+                   grepl(levels(raw8$aktberuf)[8], aktberuf) ~ 5.2,
+                   grepl(levels(raw8$aktberuf)[9], aktberuf) ~ 6.4,
+                   grepl(levels(raw8$aktberuf)[10], aktberuf) ~ 2.4,
+                   grepl(levels(raw8$aktberuf)[11], aktberuf) ~ 3.6,
+                   grepl(levels(raw8$aktberuf)[12], aktberuf) ~ 6.2,
+                   grepl(levels(raw8$aktberuf)[13], aktberuf) ~ 4.7,
+                   TRUE ~ NA_real_),
+             eink_score = case_when(# recode aktberuf
+                   grepl(levels(raw8$einkgr)[1], einkgr) ~ 1.0,
+                   grepl(levels(raw8$einkgr)[2], einkgr) ~ 1.5,
+                   grepl(levels(raw8$einkgr)[3], einkgr) ~ 2.0,
+                   grepl(levels(raw8$einkgr)[4], einkgr) ~ 2.5,
+                   grepl(levels(raw8$einkgr)[5], einkgr) ~ 3.0,
+                   grepl(levels(raw8$einkgr)[6], einkgr) ~ 3.5,
+                   grepl(levels(raw8$einkgr)[7], einkgr) ~ 4.0,
+                   grepl(levels(raw8$einkgr)[8], einkgr) ~ 4.5,
+                   grepl(levels(raw8$einkgr)[9], einkgr) ~ 5.5,
+                   grepl(levels(raw8$einkgr)[10], einkgr) ~ 6.0,
+                   grepl(levels(raw8$einkgr)[11], einkgr) ~ 6.5,
+                   grepl(levels(raw8$einkgr)[12], einkgr) |
+                   grepl(levels(raw8$einkgr)[13], einkgr) |
+                   grepl(levels(raw8$einkgr)[14], einkgr) ~ 7.0,
+                   TRUE ~ NA_real_),
+             # variable für care / lebenssituation erstellen
+             care = case_when(
+                   lebsit_SQ002 == "Ja" | 
+                   lebsit_SQ005 == "Ja" ~ "ohne care",
+                   lebsit_SQ003 == "Ja" | 
+                   lebsit_SQ004 == "Ja" | 
+                   lebsit_SQ008 == "Ja" ~ "hoher carebedarf",
+                   lebsit_SQ006 == "Ja" | 
+                   lebsit_SQ007 == "Ja" ~ "low care bedarf",
+                   TRUE ~ NA_character_),
+             care = factor(care, c("ohne care", "hoher carebedarf", "low care bedarf")),
+             # casmin für bildung
+             casmin = case_when(
+                   grepl(levels(raw8$bildab)[1], bildab) ~ "SES1a [1.0]",
+                   grepl(levels(raw8$bildab)[2], bildab) ~ "SES1b [1.7]",
+                   grepl(levels(raw8$bildab)[3], bildab) ~ "SES1c [3.0]",
+                   grepl(levels(raw8$bildab)[4], bildab) ~ "SES2b [2.8]",
+                   grepl(levels(raw8$bildab)[5], bildab) ~ "SES2a [3.6]",
+                   grepl(levels(raw8$bildab)[6], bildab) ~ "SES2cgen [3.7]",
+                   grepl(levels(raw8$bildab)[7], bildab) ~ "SES2cvoc [4.8]",
+                   grepl(levels(raw8$bildab)[8], bildab) ~ "SES3a [6.1]",
+                   grepl(levels(raw8$bildab)[9], bildab) |
+                   grepl(levels(raw8$bildab)[10], bildab) ~ "SES3b [7.0]",
+                   TRUE ~ NA_character_),
+             casmin_score = case_when(
+                   grepl(levels(raw8$bildab)[1], bildab) ~ 1.0,
+                   grepl(levels(raw8$bildab)[2], bildab) ~ 1.7,
+                   grepl(levels(raw8$bildab)[3], bildab) ~ 3.0,
+                   grepl(levels(raw8$bildab)[4], bildab) ~ 2.8,
+                   grepl(levels(raw8$bildab)[5], bildab) ~ 3.6,
+                   grepl(levels(raw8$bildab)[6], bildab) ~ 3.7,
+                   grepl(levels(raw8$bildab)[7], bildab) ~ 4.8,
+                   grepl(levels(raw8$bildab)[8], bildab) ~ 6.1,
+                   grepl(levels(raw8$bildab)[9], bildab) |
+                   grepl(levels(raw8$bildab)[10], bildab) ~ 7.0,
+                   TRUE ~ NA_real_),
+             ses_score = eink_score + isei_score + casmin_score,
+             ses = case_when(ses_score <= 1 & ses_score <= 7.9 ~ "niedrig", 
+                             ses_score <= 8 & ses_score <= 13.8 ~ "mittel",
+                             ses_score <= 13.9 & ses_score <= 21 ~ "hoch")
+             )
+
+```
+
+lasst uns die neuen Variablen ansehen
+```{r}
+raw9 %>% select(
+      isei, isei_score, # Beruf
+      casmin, casmin_score,       # Bildung
+      eink_score,      # einkommen
+      care,       # lebessituation
+      sozstatus, sss,       # Sozialer Status
+      ses_score, ses       # Sozioökonomischer Status
+      ) %>% 
+      skim()
 ```
 
 
@@ -395,7 +1046,7 @@ saveRDS(data_processed, file = paste(outpath, "data_processed.rds", sep = "/"))
 # Cut Outs
 
 Gender: if you want a tibble as output
-```{r}
+```{r eval=FALSE, include=FALSE}
 raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(contains("gender"), -contains("other")) %>% 
@@ -408,7 +1059,7 @@ raw1 %>% count(gender_SQ001)
 ```
 
 other wy of calculating frequency tables
-```{r}
+```{r eval=FALSE, include=FALSE}
 gender_frq <- raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(contains("gender"), -contains("other")) %>% 
@@ -427,7 +1078,7 @@ gender_frq %>%
 ```
 
 and an even shorter way
-```{r}
+```{r eval=FALSE, include=FALSE}
 raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(id, contains("gender"), -contains("other")) %>%
@@ -440,7 +1091,7 @@ raw1 %>%
       adorn_ns()
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 gender_frq <- raw1 %>% 
       # variablen auswähren, die das wort gender beinhalten, aber nicht das wort other
       select(contains("gender"), -contains("other")) %>% 
@@ -459,6 +1110,17 @@ gender_frq %>%
       spread(x, percent)
 ```
 
+filter nachdem tidy_mc benutzt wurde
+```{r eval=FALSE, include=FALSE}
+fremdwahr_frq <- raw6 %>% 
+      tidy_mc("fremdwahr") %>% 
+      filter(var == "fremdwahr")
+
+fremdwahr_frq %>% tabyl(var, answer) %>% 
+      adorn_percentages() %>% 
+      adorn_rounding(digits = 2) 
+```
+
 another way to recode factors
 ```{r eval=FALSE, include=FALSE}
 case_when(  mh == paste(levels(raw5$mh)[1]) |
@@ -470,13 +1132,48 @@ case_when(  mh == paste(levels(raw5$mh)[1]) |
             mh == paste(levels(raw5$mh)[7]) ~ "recode this")
 ```
 
+another grepl anwendung
+```{r}
+rassdisk_subset <- raw1[,grepl(c("diskallg"), attributes(raw1)$names)]
+```
+
+cowplot
+```{r}
+cowplot::plot_grid(plotlist = barplot_mc(raw1, "gender"),
+          labels = "AUTO",
+          align = "hv")
+```
+
 
 # help
 
 - purrr: https://stackoverflow.com/questions/49989741/error-using-dplyrcount-within-purrrmap
 - purrr: https://stackoverflow.com/questions/43013175/function-to-generate-multiple-htmltables-using-purrrmap
 - purrr und plots: https://aosmith.rbind.io/2018/01/31/added-variable-plots/
+- writing functions in dplyr: https://www.r-bloggers.com/programming-with-dplyr-by-using-dplyr/
+- programming in dplyr: https://dplyr.tidyverse.org/articles/programming.html
 
+# template structure
+
+## Dimension_XXX
+
+zuerst sehen wir uns die vorhandenen Roh-Daten an, die etwas mit der Dimension rassistische Diskriminierung des Diversity Profils zu tun haben
+
+### Info Raw Data
+
+**Describe Raw Data**
+
+
+
+### Plot Raw Data
+
+**Visualize Raw Data**
+
+
+
+### Variable_XXX {.active}
+
+**Generate New Variable**
 
 
 
