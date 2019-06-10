@@ -15,5 +15,5 @@ Overview of generated variables:
 - Alter (numeric: `age`)
 - Migrationshintergrund (factors: `mh_d`, `mh_gen`, `refu_gen`, `vertriebene`)
 - rassistisch diskriminierte Menschen (factor: `rassdisk`)
-- Beeinträchtigung ( factors: `beeint_d`, `schwerbeh_d)
+- Beeinträchtigung ( factors: `beeint_d`, `schwerbeh_d`)
 - SES (factors: `ses`, `care`, numeric: `ses_score`, `sss`)
