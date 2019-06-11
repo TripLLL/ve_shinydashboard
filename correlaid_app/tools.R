@@ -1,10 +1,8 @@
-library(tidyverse)
-library(plotly)
-library(readxl)
+pacman::p_load(tidyverse, plotly,readxl)
 
 ###########################################
 
-fragen_dim_namen.df <- read_excel("exports/mapping_colnames_20190530_174209.xlsx", 
+fragen_dim_namen.df <- read_excel("correlaid_app/exports/mapping_colnames_20190530_174209.xlsx", 
                                                sheet = "fragen_dim_namen")
 
 start_question_choices <- fragen_dim_namen.df %>%
@@ -12,7 +10,7 @@ start_question_choices <- fragen_dim_namen.df %>%
       filter(bar_chart == TRUE) %>%
       pull("question_id_variable_name") 
 
-col_names_labels.df <- read_excel("exports/mapping_colnames_20190530_174209.xlsx", 
+col_names_labels.df <- read_excel("correlaid_app/exports/mapping_colnames_20190530_174209.xlsx", 
                                   sheet = "col_names_labels")
 
 vars <- str_split(start_question_choices[[1]], pattern = " ", simplify = TRUE)[ ,2]
@@ -47,20 +45,21 @@ create_barplot_data <- function(df){
 
 create_barplot <- function(df, percent = FALSE, title = ""){
       
-      if(percent){
+      if (percent) {
          df %>% 
-            ggplot(aes(x= variable, y = responses_percentage, fill = answer)) + 
+            ggplot(aes(x = variable, y = responses_percentage, fill = answer)) + 
             geom_bar(stat = "identity", position = "dodge") + #make the stacked bars
-            theme(legend.position="bottom", axis.text.x = element_text(angle = 45, hjust = 1)) +
+            facet_wrap(~variable) +
+            theme(legend.position = "bottom", axis.text.x = element_text(angle = 45, hjust = 1)) +
             ggtitle(title) + 
             xlab("Selected Variable(s)") +
             ylab("% of responses")
                   
       } else {
          df %>% 
-            ggplot(aes(x= variable, y = responses, fill = answer)) + 
+            ggplot(aes(x = variable, y = responses, fill = answer)) + 
             geom_bar(stat = "identity", position = "dodge") + #make the stacked bars
-            theme(legend.position="bottom", axis.text.x = element_text(angle = 45, hjust = 1)) +
+            theme(legend.position = "bottom", axis.text.x = element_text(angle = 45, hjust = 1)) +
             ggtitle(title) + 
             xlab("Selected Variable(s)") +
             ylab("Number of responses")
