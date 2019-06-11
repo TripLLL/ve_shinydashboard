@@ -49,7 +49,6 @@ create_barplot <- function(df, percent = FALSE, title = ""){
          df %>% 
             ggplot(aes(x = variable, y = responses_percentage, fill = answer)) + 
             geom_bar(stat = "identity", position = "dodge") + #make the stacked bars
-            facet_wrap(~variable) +
             theme(legend.position = "bottom", axis.text.x = element_text(angle = 45, hjust = 1)) +
             ggtitle(title) + 
             xlab("Selected Variable(s)") +
