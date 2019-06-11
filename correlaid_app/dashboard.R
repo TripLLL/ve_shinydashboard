@@ -4,10 +4,12 @@ pacman::p_load(shinydashboard, shiny)
 # This file will stay on the local machine and is not shared or updated in the git cloud.
 source(file = ".path.R")
 
-# run script that turns limesurvey output into R Dataset
-source(file = paste(datapath, "survey_584752_R_syntax_file.R", sep = "/"))
 
-source(file = "tools.R")
+# run script that turns limesurvey output into R Dataset
+# source(file = paste(datapath, "survey_584752_R_syntax_file.R", sep = "/"))
+data <- readRDS(file = "data/example_data.rds")
+
+source(file = "correlaid_app/tools.R")
      
 ## Header ---------------------------------------------------------------------
 header      <-  dashboardHeader(title = "Dashboard", titleWidth = 150)
@@ -138,14 +140,15 @@ server <- function(input, output, session) {
   #   }
   # }, ignoreNULL = FALSE)
   #  print("exited updating filters")
+      
   output$selected_text <- renderText({ 
-    if(!is.null(input$selected_question)){
+    if (!is.null(input$selected_question)) {
       filter(fragen_dim_namen.df, question_id_variable_name == input$selected_question)$question
     }
   })
   print("rendered text")
   filter.data <- reactive({
-    if(!is.null(input$selected_question)){
+    if (!is.null(input$selected_question)) {
       # print(input$selected_variables)
       
       vars <- str_split(input$selected_question, pattern = " ", simplify = TRUE)[ ,2]
