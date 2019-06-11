@@ -7,7 +7,7 @@ source(file = ".path.R")
 
 # run script that turns limesurvey output into R Dataset
 # source(file = paste(datapath, "survey_584752_R_syntax_file.R", sep = "/"))
-data <- readRDS(file = "data/example_data.rds")
+data <- readRDS(file = "data/data_processed.rds")
 
 source(file = "correlaid_app/tools.R")
      
