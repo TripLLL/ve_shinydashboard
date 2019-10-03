@@ -86,7 +86,11 @@ create_barplot <- function(df, percent = FALSE, title = ""){
 
 # DELETE 
 # -----
-data$fgeshandother[2:10] <- c("unicorn", "what a unicorn", "test it all", "I want it all", "test", "I want it now", "unicorn queen", "test", "words")
+data$fgeshandother[2:21] <- c("unicorn", "what a unicorn", "test it all", 
+                              "I want it all", "test", "I want it now", "unicorn queen", "test", "words", 
+                              "Hähnchen Suppe mit Gemüse",
+                              "Bibliotheken", "Bibliotheken", "Bibliotheken", "Bibliotheken", "Bibliotheken", "Bibliotheken", 
+                              "Bibliothek", "Bibliothek", "Bibliothek", "Bibliothek")
 #------
 
 data(stopwords_de)
@@ -106,7 +110,7 @@ tokenize_and_clean <- function(df, do_stem = FALSE, custom_stopwords = NULL){
       filter(!(token %in% c(custom_stopwords)) ) # remove custom stopwords
    
    if(do_stem){
-      return(mutate(out.df, token = wordStem(.$token, language = "german")))
+      return(mutate(out.df, token = wordStem(token, language = "german")))
    } 
    
    return(out.df)

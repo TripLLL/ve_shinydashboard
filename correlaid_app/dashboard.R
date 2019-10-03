@@ -88,20 +88,19 @@ body        <- dashboardBody(
               fluidRow(
                 box(
                   title = "Filters",
-                  # selectizeInput(inputId = 'selected_analysis', 
-                  #                label = 'Select Analysis', 
-                  #                choices = c("bar_chart", "freetext"), 
-                  #                selected = "bar_chart", multiple = FALSE, options = NULL),
                   
                   selectizeInput(inputId = 'selected_text_question', 
                                  label = 'Select question for text analysis', 
                                  choices = start_text_question_choices, 
-                                 selected = start_text_question_choices[[1]], multiple = FALSE, options = NULL)
+                                 selected = start_text_question_choices[[1]], multiple = FALSE, options = NULL),
                   
-                  # selectizeInput(inputId = 'selected_variables', 
-                  #                label = 'Select Variable(s) for bar_chart', 
-                  #                choices = start_variable_choices, 
-                  #                selected = start_variable_choices[[1]], multiple = TRUE, options = NULL)
+                  textInput(inputId = 'words_to_filter',
+                            label = "Enter words to filter out (separated with commas, without space)", 
+                            placeholder = "word1,word2"),
+                  
+                  checkboxInput(inputId = "stem_checkbox", 
+                                label = "Check this box to display only stems instead of full words", 
+                                value = FALSE)
                 ),
                 box(width = 12,
                     title = 'Selected Question',
@@ -247,13 +246,23 @@ server <- function(input, output, session) {
   })
   print("text:filtered data")
   
-  token_count.data <- reactive({
-    if(!is.null(input$selected_text_question)){
-      # print(input$selected_variables)
-      
-      count_words_df(tokenize_and_clean(filter_text.data()) )
+  words_to_filter_vector <- reactive({
+    if(!is.null(input$words_to_filter)){
+
+      unlist(strsplit(input$words_to_filter, ",")) # get words separated by ',' as vector
     }
   })
+  
+  token_count.data <- reactive({
+    if(!is.null(input$selected_text_question)){
+      print(input$stem_checkbox)
+      
+      o.df = count_words_df(tokenize_and_clean(df=filter_text.data(), do_stem=input$stem_checkbox, custom_stopwords=words_to_filter_vector()) )
+      print(o.df)
+      o.df
+    }
+  })
+
   
   output$plot_text_analysis <- renderPlotly(
     count_words_barplot(df = token_count.data())
