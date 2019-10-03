@@ -4,12 +4,10 @@ pacman::p_load(shinydashboard, shiny)
 # This file will stay on the local machine and is not shared or updated in the git cloud.
 source(file = ".path.R")
 
-
 # run script that turns limesurvey output into R Dataset
-# source(file = paste(datapath, "survey_584752_R_syntax_file.R", sep = "/"))
-data <- readRDS(file = "data/data_processed.rds")
+source(file = paste(datapath, "survey_584752_R_syntax_file.R", sep = "/"))
 
-source(file = "correlaid_app/tools.R")
+source(file = "tools.R")
      
 ## Header ---------------------------------------------------------------------
 header      <-  dashboardHeader(title = "Dashboard", titleWidth = 150)
@@ -24,7 +22,6 @@ sidebar     <- dashboardSidebar(
              menuItem("Free Text", tabName = "txtab", icon = icon("pen-nib"))
              )
           )
-
   
  ## Body ----------------------------------------------------------------------
 body        <- dashboardBody(
@@ -52,7 +49,7 @@ body        <- dashboardBody(
                 ),
                 box(width = 12,
                     title = 'Selected Question',
-                    textOutput(outputId = "selected_text")
+                    textOutput(outputId = "selected_question_text")
                 ),
                 box(width = 12,
                     title = 'Bar Plots',
@@ -85,9 +82,47 @@ body        <- dashboardBody(
               )
       ),
       
-      # Second tab content
+      # Third tab content
       tabItem(tabName = "txtab",
-              h1("Free-text analysis")
+              h1("Free-text analysis"),
+              fluidRow(
+                box(
+                  title = "Filters",
+                  
+                  selectizeInput(inputId = 'selected_text_question', 
+                                 label = 'Select question for text analysis', 
+                                 choices = start_text_question_choices, 
+                                 selected = start_text_question_choices[[1]], multiple = FALSE, options = NULL),
+                  
+                  textInput(inputId = 'words_to_filter',
+                            label = "Enter words to filter out (separated with commas, without space)", 
+                            placeholder = "word1,word2"),
+                  
+                  checkboxInput(inputId = "stem_checkbox", 
+                                label = "Check this box to display only stems instead of full words", 
+                                value = FALSE)
+                ),
+                box(width = 12,
+                    title = 'Selected Question',
+                    textOutput(outputId = "selected_text_question_text")
+                ),
+                box(width = 12,
+                    title = 'Plots',
+                    # downloadButton(outputId = 'download_data', label = 'Download'),
+                    plotOutput(outputId = 'wordcloud'),
+                    h2(""), # to separate a bit the outputs
+                    # plotlyOutput(outputId = 'plot_text_analysis_perc')
+                    plotlyOutput(outputId = 'plot_text_analysis')
+                ),
+
+
+                box(width = 12,
+                    title = 'Data',
+                    downloadButton(outputId = 'download_text_data', label = 'Download CSV'),
+                    h2(""), # to separate a bit the outputs
+                    dataTableOutput(outputId = 'data_out_text_analysis')
+                )
+              )
       )
     )
   )
@@ -99,56 +134,18 @@ if (interactive()) {
 ui <- dashboardPage(header, sidebar, body, skin = "black")
 
 server <- function(input, output, session) {
-  # ref_analysis_val <- "bar_chart"
-  # ref_analysis_val_new <- NULL
-  # 
-  # observeEvent(input$selected_analysis, {
-  #   df <- fragen_dim_namen.df[, c("question_id_variable_name", input$selected_analysis)] 
-  #   colnames(df) <- c("question_id_variable_name", "selected_analysis")
-  #   newchoices <- df %>% 
-  #     filter(selected_analysis == TRUE) %>%
-  #     pull("question_id_variable_name") 
-  #   
-  #   if (ref_analysis_val == input$selected_analysis) {
-  #     print(paste("No update - val is", input$selected_analysis))
-  #     ref_analysis_val <<-  input$selected_analysis
-  #   } else {
-  #     # update UI
-  #     print(paste("updating selection to", input$selected_analysis))
-  #     
-  #     #ref_analysis_val <<- NULL
-  #     ref_analysis_val <<- input$selected_analysis
-  #     #print(newchoices)
-  #     updateSelectizeInput(session, 
-  #                          'selected_question', 
-  #                          label = paste('Select Question for', ref_analysis_val), 
-  #                          choices = newchoices, selected = newchoices[[1]], server = TRUE)
-  #     
-  #     vars <- str_split(newchoices[[1]], pattern = " ", simplify = TRUE)[ ,2]
-  #     #print(vars)
-  #     colnames_filtered_data_start <- data %>% 
-  #       select(starts_with(vars), -ends_with("other")) %>% colnames 
-  #     #print(colnames_filtered_data_start)
-  #     new_variable_choices <- col_names_labels.df %>% 
-  #       filter(colnames %in% colnames_filtered_data_start) %>%
-  #       pull("collabels_short")
-  #     #print(new_variable_choices)
-  #     updateSelectizeInput(session, 
-  #                          'selected_variables', 
-  #                          label = paste('Select Variable(s) for', ref_analysis_val), 
-  #                          choices = new_variable_choices, selected = new_variable_choices[[1]], server = TRUE)
-  #   }
-  # }, ignoreNULL = FALSE)
-  #  print("exited updating filters")
-      
-  output$selected_text <- renderText({ 
-    if (!is.null(input$selected_question)) {
+  
+ # tab Univariate Analysis
+  
+  output$selected_question_text <- renderText({ 
+    if(!is.null(input$selected_question)){
       filter(fragen_dim_namen.df, question_id_variable_name == input$selected_question)$question
     }
   })
-  print("rendered text")
+  print("univ:rendered text")
+  
   filter.data <- reactive({
-    if (!is.null(input$selected_question)) {
+    if(!is.null(input$selected_question)){
       # print(input$selected_variables)
       
       vars <- str_split(input$selected_question, pattern = " ", simplify = TRUE)[ ,2]
@@ -158,7 +155,8 @@ server <- function(input, output, session) {
         select(id, starts_with(vars), -ends_with("other"))
       }
   })
-  print("filtered data")
+  print("univ:filtered data")
+  
   observeEvent(input$selected_question, {
     
     colnames_filtered_data <- filter.data() %>% 
@@ -176,7 +174,8 @@ server <- function(input, output, session) {
 
   }, ignoreNULL = FALSE)
   
-  print("exited updating filters 2")
+  print("univ:exited updating filters 2")
+  
   barplot_data.df <- reactive({ 
     filtered_col_names_labels.df <- col_names_labels.df %>% 
       filter(collabels_short %in% input$selected_variables) %>%
@@ -204,7 +203,7 @@ server <- function(input, output, session) {
     options = list(pageLength = 10)
   )
   
-  print("rendered table")
+  print("univ:rendered table")
   output$download_data <- downloadHandler(
     
     filename = function() {
@@ -216,9 +215,89 @@ server <- function(input, output, session) {
     }
   )
   
-  print("rendered download button")
+  print("univ:rendered download button")
+  
+  #---------------------------------------
+  
+  # tab Text Analysis
+  
+  output$selected_text_question_text <- renderText({ 
+    if(!is.null(input$selected_text_question)){
+      filter(fragen_dim_namen.df, question_id_variable_name == input$selected_text_question)$question
+    }
+  })
+  print("text:rendered text")
+  
+  filter_text.data <- reactive({
+    if(!is.null(input$selected_text_question)){
+      # print(input$selected_variables)
+
+      vars <- str_split(input$selected_text_question, pattern = " ", simplify = TRUE)[ ,2]
+      # print(vars)
+
+      f.df <- data %>%
+        select(id, starts_with(vars)) %>% 
+        select(id, ends_with("other"))
+      
+      colnames(f.df) <- c("id", "Text")
+      
+      f.df
+    }
+  })
+  print("text:filtered data")
+  
+  words_to_filter_vector <- reactive({
+    if(!is.null(input$words_to_filter)){
+
+      unlist(strsplit(input$words_to_filter, ",")) # get words separated by ',' as vector
+    }
+  })
+  
+  token_count.data <- reactive({
+    if(!is.null(input$selected_text_question)){
+      print(input$stem_checkbox)
+      
+      o.df = count_words_df(tokenize_and_clean(df=filter_text.data(), do_stem=input$stem_checkbox, custom_stopwords=words_to_filter_vector()) )
+      print(o.df)
+      o.df
+    }
+  })
+
+  
+  output$plot_text_analysis <- renderPlotly(
+    count_words_barplot(df = token_count.data())
+  )
+  
+  output$wordcloud <- renderPlot(
+    wordcloud(words = token_count.data()$token, 
+              freq = token_count.data()$n, 
+              max.words = 40, # adding filter to max.words??
+              scale = c(2,.3), 
+              colors = brewer.pal(6, "Dark2"))
+  )
+  
+  output$data_out_text_analysis <- renderDataTable(
+    token_count.data(), 
+    options = list(pageLength = 10)
+  )
+  
+  print("text:rendered table")
+  
+  output$download_text_data <- downloadHandler(
+    
+    filename = function() {
+      paste0('data_export_text_', format(Sys.time(), "%Y%m%d_%H%M%S"), '.csv')
+    },
+    
+    content = function(file) {
+      write_csv(x = token_count.data(), path = file, na = '')
+    }
+  )
+  
+  print("text:rendered download button")
+  
+  
 }
 
 shinyApp(ui, server)
 }
-
